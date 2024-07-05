@@ -5,7 +5,7 @@ SANITIZE_FLAGS	:=	-g -fsanitize=address
 
 CC				:=	cc
 
-SRC_FILES		:=	main.c
+SRC_FILES		:=	main.c error_functions.c
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 NAME			:=	fdf
 LIBFT			:=	libft/libft.a

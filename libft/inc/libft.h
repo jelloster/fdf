@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:39:31 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/12 16:13:51 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:02:01 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <stddef.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 // ✧.* TYPE DEFINITIONS ✧.*
 

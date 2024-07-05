@@ -6,47 +6,42 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:29 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/04 14:25:50 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:47:06 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* you need 2 images so you can write to the one that is not currently
- * presented (to prevent screen tearing);
+/*
+ * Hooks allow you to add your own functions to the main loop that get executed
+ * every frame. Only one hook can be set at a time.
  */
-void	pxl_put(t_fdf img, int x, int y, int color);
+
 
 int	main(void)
 {
-	void	*mlx;
-//	t_fdf	img;
-//	void	*mlx_win;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 
-	// Init MLX
+	// Initialize and run a new window instance with resize ability
 	mlx = mlx_init(RES_X, RES_Y, "fdf", true);
+	if (!mlx)
+		ft_error();
 
-	/*
-	// Init some window
-	img.win = mlx_new_window(mlx, RES_X, RES_Y, "fdf");
+	// Create an image with n x n resolution
+	img = mlx_new_image(mlx, 256, 256);
+	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+		ft_error();
 
-	// Get address of ?
-	img.addr = mlx_get_data_addr(img.win, &img.bpp, &img.ll, &img.endian);
+	// Set the channels of each pixel in our image to 255 (wtf?)
+	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 
-	pxl_put(img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_wi, img.win, 0, 0);
-	*/
-	// 
+	// Draw the image at coordinates (0, 0)
+	mlx_image_to_window(mlx, img, 0, 0);
+
+	// Run the main loop and terminate on quit
 	mlx_loop(mlx);
-
-	return (0);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
 }
 
-void	pxl_put(t_fdf img, int x, int y, int color)
-{
-	char	*dst;
-// line_length differs from the actual window width. We therefore should ALWAYS
-// calculate the memory offset using the line length set by mlx_get_data_addr
-	dst = img.addr + (y + img.ll + x * (img.bpp / 8));
-	*(unsigned int *)dst = color;
-}
