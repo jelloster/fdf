@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/05 13:27:13 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:54:23 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FDF_H
 
 // --- INCLUDES ---
-# include "MLX42/include/MLX42/MLX42.h"
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdlib.h>
+
+# include "MLX42/include/MLX42/MLX42.h"
 # include "libft/inc/libft.h"
 
 typedef struct s_fdf
@@ -64,5 +66,14 @@ typedef struct	s_map
 // --- FUNCTION PROTOTYPES ---
 
 void	ft_error(void);
+
+// memory_functions.c
+int	allocate_map_grid(t_map *map);
+int	free_map_grid(t_map *map, int ret);
+int	free_array_of_arrays(char **arr);
+
+// parsing.c
+void	init_map(char *file, t_map *map);
+
 
 #endif

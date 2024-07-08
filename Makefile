@@ -5,14 +5,14 @@ SANITIZE_FLAGS	:=	-g -fsanitize=address
 
 CC				:=	cc
 
-SRC_FILES		:=	main.c error_functions.c
+SRC_FILES		:=	main.c error_functions.c parsing.c memory_functions.c
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 NAME			:=	fdf
 LIBFT			:=	libft/libft.a
 
 LIBMLX			:=	MLX42/build/libmlx42.a
 MLX				:=	./MLX42
-HEADERS			:=	-I $(MLX)/include
+HEADERS			:=	-I $(MLX)/include -I $(LIBFT)/inc
 
 LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 

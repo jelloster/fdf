@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:29 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/04 15:47:06 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:55:42 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,19 @@
  */
 
 
-int	main(void)
+int	main(int ac, char *av[])
 {
 	mlx_t		*mlx;
+	t_map		map;
 	mlx_image_t	*img;
 
+	int fd = open(av[1], O_RDONLY);
+	get_next_line(fd);
+	close(fd);
+
 	// Initialize and run a new window instance with resize ability
+	if (ac == 2)
+		init_map(av[1], &map);
 	mlx = mlx_init(RES_X, RES_Y, "fdf", true);
 	if (!mlx)
 		ft_error();

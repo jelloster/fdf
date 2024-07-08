@@ -1,6 +1,6 @@
 NAME			:=	libft.a
 CC				:=	cc 
-FLAGS 			:=	-Wall -Wextra -Werror
+FLAGS 			:=	-Wall -Wextra -Werror -g
 
 INC_DIR			:=	./inc/
 INC				:=	-I $(INC_DIR)

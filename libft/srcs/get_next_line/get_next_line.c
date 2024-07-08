@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:47:24 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/04 16:09:45 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:15:30 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*read_until_line(int fd, char *buf)
 		temp_buf = malloc(sizeof(char) * (GNL_BUFFER_SIZE + 1));
 		if (!temp_buf)
 			return (ft_memdel(&buf));
-		r = read(fd, temp_buf, BUFFER_SIZE);
+		r = read(fd, temp_buf, GNL_BUFFER_SIZE);
 		if (r <= 0)
 		{
 			ft_memdel(&temp_buf);
