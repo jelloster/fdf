@@ -37,13 +37,20 @@ int	main(int ac, char *av[])
 	img = mlx_new_image(mlx, RES_X, RES_Y);
 
 	// Set all pixels to white
-//	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+	//ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+	//
+	for (uint32_t y = 0; y < img->height; y++) {
+		for (uint32_t x = 0; x < img->width; x++) {
+		    mlx_put_pixel(img, x, y, 0x00008B);
+        }
+    }
 
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
-	draw_points(img, map);
-	draw_line(img, map.grid[0][0], map.grid[map.h-1][map.w-1]);
+	draw_points(img, &map);
+//	draw_line(img, map.grid[0][0], map.grid[map.h-1][map.w-1]);
+	draw_lines(img, &map);
 
 	// Run the main loop and terminate on quit
 	mlx_loop(mlx);
