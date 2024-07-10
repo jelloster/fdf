@@ -1,7 +1,7 @@
 #include "fdf.h"
 
 static void	get_point_color(t_point *point, int max_h);
-int ip(int start, int end, t_point *p, int max_h);
+int	ip(int s, int e, int n, int n_max);
 
 void	get_point_colors(t_map *map)
 {
@@ -25,14 +25,25 @@ static void	get_point_color(t_point *point, int max_h)
 	int		newG;
 	int		newB;
 
-	newR = ip((C1 >> 16) & 0xFF, (C2 >> 16) & 0xFF, point, max_h);
-	newG = ip((C1 >> 8) & 0xFF, (C2 >> 8) & 0xFF, point, max_h);
-	newB = ip(C1 & 0xFF, C2 & 0xFF, point, max_h);
+	newR = ip((C1 >> 16) & 0xFF, (C2 >> 16) & 0xFF, point->h, max_h);
+	newG = ip((C1 >> 8) & 0xFF, (C2 >> 8) & 0xFF, point->h, max_h);
+	newB = ip(C1 & 0xFF, C2 & 0xFF, point->h, max_h);
 	color = (newR << 16) | (newG << 8) | newB;
 	point -> c = color;
 }
 
-int ip(int start, int end, t_point *p, int max_h)
+unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l)
 {
-	return (start + ((end - start) * p -> h) / max_h);
+	unsigned int	color;
+	int		newR;
+	int		newG;
+	int		newB;
+	int		l;
+
+	l = dis(p1, p2);
+	newR = ip((p2.c >> 16) & 0xFF, (p1.c >> 16) & 0xFF, l, t_l);
+	newG = ip((p2.c >> 8) & 0xFF,(p1.c >> 8) & 0xFF,  l, t_l);
+	newB = ip(p2.c & 0xFF, p1.c & 0xFF, l, t_l);
+	color = (newR << 16) | (newG << 8) | newB;
+	return (color);
 }
