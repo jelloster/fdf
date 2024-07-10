@@ -17,38 +17,38 @@
  * every frame. Only one hook can be set at a time.
  */
 
-
 int	main(int ac, char *av[])
 {
 	mlx_t		*mlx;
 	t_map		map;
 	mlx_image_t	*img;
 
-	int fd = open(av[1], O_RDONLY);
-	get_next_line(fd);
-	close(fd);
-
-	// Initialize and run a new window instance with resize ability
 	if (ac == 2)
 		init_map(av[1], &map);
+	else
+		ft_putstr_fd("Incorrect amount of arguments.\n", 2);
+
+	// Initialize and run a new window instance with resize ability
 	mlx = mlx_init(RES_X, RES_Y, "fdf", true);
 	if (!mlx)
 		ft_error();
 
 	// Create an image with n x n resolution
-	img = mlx_new_image(mlx, 256, 256);
+	img = mlx_new_image(mlx, RES_X, RES_Y);
+
+	// Set all pixels to white
+//	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
-	// Set the channels of each pixel in our image to 255 (wtf?)
-	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-
-	// Draw the image at coordinates (0, 0)
-	mlx_image_to_window(mlx, img, 0, 0);
+	draw_points(img, map);
+	draw_line(img, map.grid[0][0], map.grid[map.h-1][map.w-1]);
 
 	// Run the main loop and terminate on quit
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	if (ac == 2)
+		free_map_grid(&map, 0);
 	return (EXIT_SUCCESS);
 }
-

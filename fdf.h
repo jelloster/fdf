@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/08 16:54:23 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:52:56 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,39 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include "libft/inc/libft.h"
 
-typedef struct s_fdf
-{
-	// Window
-	void	*win;
-	// Memory address where bytes will be mutated
-	void	*addr;
-	// Bits per pixel
-	int		bpp;
-	// Line length
-	int		ll;
-	// Endian
-	int		endian;
-
-}			t_fdf;
-
-typedef struct s_file
-{
-	char	**lines;
-	int		size;
-}	t_file;
+typedef unsigned int t_ui;
 
 typedef struct s_point
 {
-	int	h;
-	int	x;
-	int	y;
+	int		h;
+	int		x;
+	int		y;
+	t_ui		c;
 }			t_point;
 
 typedef struct	s_map
 {
 	int	w;
 	int	h;
+	int	max_h;
 	t_point	**grid;
 }				t_map;
 
+typedef struct s_coor
+{
+	int	x;
+	int	y;
+}			t_coor;
+
 // --- MACROS ---
-# define RES_X 1080
-# define RES_Y 1920
+# define RES_X 400
+# define RES_Y 400
+# define MARGIN 30
+
+#define ABS(x) ((x) < 0 ? -(x) : (x));
+
+# define C1 0xFFFFFFFF
+# define C2 0xFF0000FF
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCESS 0
@@ -70,10 +65,15 @@ void	ft_error(void);
 // memory_functions.c
 int	allocate_map_grid(t_map *map);
 int	free_map_grid(t_map *map, int ret);
-int	free_array_of_arrays(char **arr);
+int	free_split(char **arr);
 
 // parsing.c
 void	init_map(char *file, t_map *map);
 
+void	get_point_colors(t_map *map);
+
+void	draw_points(mlx_image_t *img, t_map map);
+
+void	draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
 #endif

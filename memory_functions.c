@@ -13,6 +13,7 @@ int	allocate_map_grid(t_map *map)
 		map -> grid[i] = malloc((map -> w) * (sizeof (t_map)));
 		if (!map -> grid[i])
 			return (free_map_grid(map, -1));
+		i++;
 	}
 	return (1);
 }
@@ -29,13 +30,14 @@ int	free_map_grid(t_map *map, int ret)
 			if (map -> grid[i])
 				free(map -> grid[i]);
 			map -> grid[i] = NULL;
+			i++;
 		}
 		free(map -> grid);
 	}
 	return (ret);
 }
 
-int	free_array_of_arrays(char **arr)
+int	free_split(char **arr)
 {
 	size_t	i;
 

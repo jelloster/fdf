@@ -13,6 +13,7 @@ void	init_map(char *file, t_map *map)
 		return ;
 	map -> h = 0;
 	map -> w = -1;
+	map -> max_h = 0;
 	if(!get_dimensions(fd, map))
 	{
 		close(fd);
@@ -20,7 +21,10 @@ void	init_map(char *file, t_map *map)
 	}
 	close(fd);
 	fd = open(file, O_RDONLY);
+	if(!allocate_map_grid(map))
+		return ;
 	parse(fd, map);
+	get_point_colors(map);
 	close(fd);
 }
 
@@ -43,15 +47,14 @@ static int	get_dimensions(int fd, t_map *map)
 			temp_w++;
 		if (map -> w != -1 && temp_w != map -> w)
 		{
-			free(split_line);
+			free_split(split_line);
 			return (0);
 		}
 		else
 			map -> w = temp_w;
-		free(split_line);
+		free_split(split_line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	return (1);
 }
 
@@ -78,12 +81,14 @@ static int	parse(int fd, t_map *map)
 		while (j < map -> w)
 		{
 			map -> grid[i][j].h = ft_atoi(split_line[j]);
+			if (map -> grid[i][j].h > map -> max_h)
+				map -> max_h = map -> grid[i][j].h;
 			map -> grid[i][j].x = j;
 			map -> grid[i][j].y = i;
 			j++;
 		}
 		free(line);
-		free_array_of_arrays(split_line);
+		free_split(split_line);
 		i++;
 	}
 	return (1);
