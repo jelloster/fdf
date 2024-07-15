@@ -40,7 +40,7 @@ static void	draw_isometric_point(int x, int y, t_point *p, t_screen s)
 	int	s_y;
 
 	s_x = RES_X / 2 + ((x - y) * (s.t_w / 2));
-	s_y = s.mar_y + ((x + y) * (s.t_h / 2)) - p -> h * 5;
+	s_y = s.mar_y + ((x + y) * (s.t_h / 2)) - p -> h * s.t_h / 4;
 	p -> res_x = s_x;
 	p -> res_y = s_y;
 	mlx_put_pixel(s.img, s_x, s_y, p -> c);

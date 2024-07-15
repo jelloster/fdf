@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	get_point_color(t_point *point, int max_h);
+static void	get_point_color(t_point *point, t_map map);
 int	ip(int s, int e, int n, int n_max);
 
 void	get_point_colors(t_map *map)
@@ -13,21 +13,22 @@ void	get_point_colors(t_map *map)
 	{
 		w = 0;
 		while (w < map -> w)
-			get_point_color(&map -> grid[h][w++], map -> max_h);
+			get_point_color(&map -> grid[h][w++], *map);
 		h++;
 	}
 }
 
-static void	get_point_color(t_point *point, int max_h)
+static void	get_point_color(t_point *point, t_map map)
 {
 	unsigned int	color;
 	int		R;
 	int		G;
 	int		B;
-
-	R = ip((C1 >> 16) & 0xFF, (C2 >> 16) & 0xFF, point->h, max_h);
-	G = ip((C1 >> 8) & 0xFF, (C2 >> 8) & 0xFF, point->h, max_h);
-	B = ip(C1 & 0xFF, C2 & 0xFF, point->h, max_h);
+	
+	int x = map.max_h - point -> h;
+	R = ip((C2 >> 16) & 0xFF, (C1 >> 16) & 0xFF, x, map.range);
+	G = ip((C2 >> 8) & 0xFF, (C1 >> 8) & 0xFF, x, map.range);
+	B = ip(C2 & 0xFF, C1 & 0xFF, x, map.range);
 	color = (R << 16) | (G << 8) | B;
 	point -> c = color;
 }

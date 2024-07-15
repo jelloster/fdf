@@ -24,6 +24,7 @@ void	init_map(char *file, t_map *map)
 	if(!allocate_map_grid(map))
 		return ;
 	parse(fd, map);
+	map->range = map->max_h - map->min_h;
 	get_point_colors(map);
 	close(fd);
 }

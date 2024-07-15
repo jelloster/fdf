@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/15 14:02:51 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:20:49 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,24 @@ typedef struct s_screen
 }	t_screen;
 
 // --- MACROS ---
-# define RES_X 1000
-# define RES_Y 1000
+# define RES_X 2000
+# define RES_Y 2000
 # define MARGIN 30
 
 #define ABS(x) ((x) < 0 ? -(x) : (x));
 
 // Colors
-#define RED       0xFF0000FF
-#define GREEN     0x00FF00FF
+#define RED       0xFF0000FF // black
+#define GREEN     0x00FF00FF // green
 #define BLUE      0x0000FFFF
 #define YELLOW    0xFFFF00FF
-#define CYAN      0x00FFFFFF
-#define MAGENTA   0xFF00FFFF
-#define WHITE     0xFFFFFFFF
-#define BLACK     0x000000FF
+#define CYAN      0x00FFFFFF // cyan
+#define MAGENTA   0xFF00FFFF // blue
+#define WHITE     0xFFFFFFFF // cyan
+#define BLACK     0x000000FF // black
 
-# define C1 WHITE
-# define C2 MAGENTA
+# define C1 BLUE
+# define C2 WHITE
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCESS 0
