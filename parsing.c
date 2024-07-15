@@ -85,7 +85,7 @@ static int	parse(int fd, t_map *map)
 			if (map -> grid[i][j].h > map -> max_h)
 				map -> max_h = map -> grid[i][j].h;
 			if (map -> grid[i][j].h < map -> min_h)
-				map ->minn_h = map -> grid[i][j].h;
+				map ->min_h = map -> grid[i][j].h;
 			map -> grid[i][j].x = j;
 			map -> grid[i][j].y = i;
 			j++;

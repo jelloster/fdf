@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/09 12:52:56 by jelloster        ###   ########.fr       */
+/*   Updated: 2024/07/15 14:02:51 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct	s_map
 typedef struct s_screen
 {
 	int	sep;
+	int	t_h;
+	int	t_w;
 	int	mar_x;
 	int	mar_y;
 	int	s_y;
@@ -54,8 +56,8 @@ typedef struct s_screen
 }	t_screen;
 
 // --- MACROS ---
-# define RES_X 400
-# define RES_Y 400
+# define RES_X 1000
+# define RES_Y 1000
 # define MARGIN 30
 
 #define ABS(x) ((x) < 0 ? -(x) : (x));

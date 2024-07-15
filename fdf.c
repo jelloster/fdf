@@ -1,6 +1,8 @@
 #include "fdf.h"
 
-static void	draw_isometric_point(int w, int h, t_point *p, t_screen s);
+static void	draw_isometric_point(int x, int y, t_point *p, t_screen s);
+
+#include <stdio.h> // remove
 
 void draw_points(mlx_image_t *img, t_map *map)
 {
@@ -9,38 +11,39 @@ void draw_points(mlx_image_t *img, t_map *map)
 	int	w;
 
 	s.img = img;
-	s.sep = (RES_X - (2 * MARGIN)) / map -> w - 5; // minus 
-	if (s.sep > (RES_Y - (2 * MARGIN)) / map -> h - 5)
-		s.sep = (RES_Y - (2 * MARGIN)) / map -> h - 5;
-	s.mar_x = (RES_X - map->w * s.sep) / 2;
-	s.mar_y = (RES_Y - map->h * s.sep) / 2;
+
+	// Get tile width based on screen width
+	s.t_w = (RES_X - 2 * MARGIN) / map -> w;
+	// Get tile heigth based on tile width
+	s.t_h = s.t_w * tan(M_PI / 6);
+
+	// Get margins based on tile width and heigth
+	s.mar_x = (RES_X - map->w * s.t_w) / 2; // not needed rn?
+	s.mar_y = (RES_Y - map->h * s. t_h) / 2;
+
 	h = 0;
 	while (h < map->h)
 	{
 	    w = 0;
 	    while (w < map->w)
 	    {
-		draw_isometric_point(w, h, &map->grid[h][w], s);
-		w++;
+			draw_isometric_point(w, h, &map->grid[h][w], s);
+			w++;
 	    }
 	    h++;
 	}
 }
 
-static void	draw_isometric_point(int w, int h, t_point *p, t_screen s)
+static void	draw_isometric_point(int x, int y, t_point *p, t_screen s)
 {
-	int	x;
-	int	y;
 	int	s_x;
 	int	s_y;
 
-	x = s.mar_x + w * s.sep;
-	y = s.mar_y + h * s.sep;
-	s_x = (x - y) * cos(M_PI / 6) - RES_X / 2; // minus
-	s_y = (x + y) * sin(M_PI / 6) - p -> h * s.sep / 2;
+	s_x = RES_X / 2 + ((x - y) * (s.t_w / 2));
+	s_y = s.mar_y + ((x + y) * (s.t_h / 2)) - p -> h * 5;
 	p -> res_x = s_x;
 	p -> res_y = s_y;
-	mlx_put_pixel(s.img, s_x, s_y, p -> c); // seg fault
+	mlx_put_pixel(s.img, s_x, s_y, p -> c);
 }
 
 void	draw_lines(mlx_image_t *img, t_map *map)
