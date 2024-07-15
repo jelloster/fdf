@@ -7,13 +7,13 @@ void	init_map(char *file, t_map *map)
 {
 	int	fd;
 
-
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return ;
 	map -> h = 0;
 	map -> w = -1;
 	map -> max_h = 0;
+	map -> min_h = 0;
 	if(!get_dimensions(fd, map))
 	{
 		close(fd);
@@ -63,7 +63,8 @@ static int	parse(int fd, t_map *map)
 	int		i;
 	int		j;
 	char	*line;
-	char	**split_line;;
+	char	**split_line;
+
 
 	i = 0;
 	while (i < map -> h)
@@ -83,6 +84,8 @@ static int	parse(int fd, t_map *map)
 			map -> grid[i][j].h = ft_atoi(split_line[j]);
 			if (map -> grid[i][j].h > map -> max_h)
 				map -> max_h = map -> grid[i][j].h;
+			if (map -> grid[i][j].h < map -> min_h)
+				map ->minn_h = map -> grid[i][j].h;
 			map -> grid[i][j].x = j;
 			map -> grid[i][j].y = i;
 			j++;

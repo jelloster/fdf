@@ -9,9 +9,9 @@ void draw_points(mlx_image_t *img, t_map *map)
 	int	w;
 
 	s.img = img;
-	s.sep = (RES_X - (2 * MARGIN)) / map->w;
-	if (s.sep > (RES_Y - (2 * MARGIN)) / map->h)
-		s.sep = (RES_Y - (2 * MARGIN)) / map->h;
+	s.sep = (RES_X - (2 * MARGIN)) / map -> w - 5; // minus 
+	if (s.sep > (RES_Y - (2 * MARGIN)) / map -> h - 5)
+		s.sep = (RES_Y - (2 * MARGIN)) / map -> h - 5;
 	s.mar_x = (RES_X - map->w * s.sep) / 2;
 	s.mar_y = (RES_Y - map->h * s.sep) / 2;
 	h = 0;
@@ -29,18 +29,18 @@ void draw_points(mlx_image_t *img, t_map *map)
 
 static void	draw_isometric_point(int w, int h, t_point *p, t_screen s)
 {
-	int	iso_x;
-	int	iso_y;
+	int	x;
+	int	y;
 	int	s_x;
 	int	s_y;
 
-	iso_x = s.mar_x + w * s.sep;
-	iso_y = s.mar_y + h * s.sep;
-	s_x = (iso_x - iso_y) * cos(M_PI / 6);
-	s_y = (iso_x + iso_y) * sin(M_PI / 6) - p -> h;
+	x = s.mar_x + w * s.sep;
+	y = s.mar_y + h * s.sep;
+	s_x = (x - y) * cos(M_PI / 6) - RES_X / 2; // minus
+	s_y = (x + y) * sin(M_PI / 6) - p -> h * s.sep / 2;
 	p -> res_x = s_x;
 	p -> res_y = s_y;
-	mlx_put_pixel(s.img, s_x, s_y, p -> c);
+	mlx_put_pixel(s.img, s_x, s_y, p -> c); // seg fault
 }
 
 void	draw_lines(mlx_image_t *img, t_map *map)

@@ -38,6 +38,8 @@ typedef struct	s_map
 	int	w;
 	int	h;
 	int	max_h;
+	int	min_h;
+	int	range;
 	t_point	**grid;
 }				t_map;
 
