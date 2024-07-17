@@ -9,7 +9,9 @@
 
 int	ip(int s, int e, int n, int n_max)
 {
-    return s + ((e - s) * n) / n_max;
+	if (n_max == 0)
+		return (0);
+    return (s + ((e - s) * n) / n_max);
 }
 
 /*

@@ -23,10 +23,19 @@ int	main(int ac, char *av[])
 	t_map		map;
 	mlx_image_t	*img;
 
-	if (ac == 2)
+	if (ac == 2 && access(av[1], R_OK) == 0)
 		init_map(av[1], &map);
 	else
-		ft_putstr_fd("Incorrect amount of arguments.\n", 2);
+	{
+		if (ac != 2)
+			ft_putstr_fd("Incorrect amount of arguments.\n", 2);
+		else
+		{
+			ft_putstr_fd(av[1], 2);
+			ft_putstr_fd(": Map not accessible\n", 2);
+		}
+		return (EXIT_FAILURE);
+	}
 
 	// Initialize and run a new window instance with resize ability
 	mlx = mlx_init(RES_X, RES_Y, "fdf", true);
