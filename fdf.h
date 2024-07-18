@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/18 14:43:08 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:11:04 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ void	draw_points(mlx_image_t *img, t_map *map);
 void	draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
 void	draw_lines(mlx_image_t *img, t_map *map);
+
+void	key_hook(mlx_key_data_t keydata, void *param);
 
 #endif

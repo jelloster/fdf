@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:29 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/18 14:34:29 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:09:50 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	main(int ac, char *av[])
 	draw_points(img, &map);
 //	draw_line(img, map.grid[0][0], map.grid[map.h-1][map.w-1]);
 	draw_lines(img, &map);
+
+	mlx_key_hook(mlx, &key_hook, NULL);
 
 	// Run the main loop and terminate on quit
 	mlx_loop(mlx);
