@@ -39,6 +39,8 @@ typedef struct	s_map
 	int	h;
 	int	max_h;
 	int	min_h;
+	int	max_x;
+	int	min_x;
 	int	range;
 	int	start;
 	t_point	**grid;
@@ -46,11 +48,11 @@ typedef struct	s_map
 
 typedef struct s_screen
 {
-	int	v_half_tiles;
+	int	half_tiles;
 	int	half_tile_w;
+	int	half_tile_h;
 
 	int	t_h;
-	int	t_w;
 	int	mar_x;
 	int	mar_y;
 	t_map	*map;
@@ -58,8 +60,8 @@ typedef struct s_screen
 }	t_screen;
 
 // --- MACROS ---
-# define RES_X 500
-# define RES_Y 500
+# define RES_X 1000
+# define RES_Y 800
 # define MARGIN 0
 
 #define ABS(x) ((x) < 0 ? -(x) : (x));

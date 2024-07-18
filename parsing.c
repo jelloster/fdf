@@ -49,7 +49,7 @@ static int	get_dimensions(int fd, t_map *map)
 		if (map -> w != -1 && temp_w != map -> w)
 		{
 			free_split(split_line);
-			return (0);
+			exit(1);
 		}
 		else
 			map -> w = temp_w;
