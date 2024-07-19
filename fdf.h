@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/18 15:11:04 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:54:26 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_screen
 }	t_screen;
 
 // --- MACROS ---
-# define RES_X 200
-# define RES_Y 200
+# define RES_X 2000
+# define RES_Y 2500
 # define MARGIN 0
 
 #define ABS(x) ((x) < 0 ? -(x) : (x));

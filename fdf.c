@@ -44,11 +44,11 @@ void	init_screen(t_map *map, t_screen *s, mlx_image_t *img)
 	}
 	else
 		s -> half_tile_w = RES_X / s -> half_tiles;
-	if (s -> half_tile_w == 1)
-		s -> half_tile_w = 2;
+	//if (s -> half_tile_w == 1)
+	//	s -> half_tile_w = 2;
 	s -> half_tile_h = s -> half_tile_w * tan(M_PI / 6);
-	if (s -> half_tile_h == 0)
-		s -> half_tile_h = 1;
+	//if (s -> half_tile_h == 0)
+	//	s -> half_tile_h = 1;
 	printf("half_tile_h : %d\n", s->half_tile_h);
 	s->mar_x = (RES_X - s -> half_tiles * s -> half_tile_w) / 2;
 	s->mar_y = (RES_Y - s->half_tiles * s->half_tile_h) / 2;
