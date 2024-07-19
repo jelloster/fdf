@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/19 15:54:26 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:05:05 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ typedef struct s_screen
 	t_map	*map;
 	mlx_image_t	*img;
 }	t_screen;
+
+typedef enum e_dir
+{
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+}	t_dir;
 
 // --- MACROS ---
 # define RES_X 2000

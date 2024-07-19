@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:25:29 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/18 15:09:50 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:10:36 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char *av[])
 	mlx_t		*mlx;
 	t_map		map;
 	mlx_image_t	*img;
+	mlx_image_t	*img2;
 
 	if (ac == 2 && access(av[1], R_OK) == 0)
 		init_map(av[1], &map);
@@ -44,6 +45,7 @@ int	main(int ac, char *av[])
 
 	// Create an image with n x n resolution
 	img = mlx_new_image(mlx, RES_X, RES_Y);
+	img2 = mlx_new_image(mlx, RES_X, RES_Y);
 
 	// Set all pixels to white
 	//ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
