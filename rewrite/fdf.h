@@ -20,16 +20,17 @@
 # include <stdlib.h>
 # include <math.h>
 
-# include "../MLX42/include/MLX42/MLX42.h" // fix
-# include "../libft/inc/libft.h" // fix
+# include "MLX42/include/MLX42/MLX42.h" // fix
+# include "libft/inc/libft.h" // fix
 
 // -- Typedefs --
 
 typedef struct s_point
 {
-	int	res_x;
-	int	res_y;
-	int	value;
+	int		res_x;
+	int		res_y;
+	int		value;
+	unsigned int	c;
 }		t_point;
 
 typedef struct s_map
@@ -39,7 +40,7 @@ typedef struct s_map
 	int		max;
 	int		min;
 	int		range;
-	t_point	**grid;
+	t_point		**grid;
 }			t_map;
 
 typedef struct s_screen
@@ -51,6 +52,7 @@ typedef struct s_screen
 	int	mar_y;
 	int	start_x;
 	int	max_res_y;
+	int	min_res_y;
 }	t_screen;
 
 typedef struct s_mlx
@@ -59,12 +61,13 @@ typedef struct s_mlx
 	mlx_image_t	*img1;
 	mlx_image_t	*img2;
 	t_map		*map;
-	t_screen	*s;
+	t_screen	s;
 
 }				t_mlx;
 
 typedef struct s_bresenhamn
 {
+	int dx;
 	int dy;
 	int sx;
 	int sy;
@@ -75,10 +78,25 @@ typedef struct s_bresenhamn
 
 // -- Macros --
 
-# define RES_X 1000
-# define RES_Y 1000
+# define RES_X 700
+# define RES_Y 700
+
+# define RED       0xFF0000FF
+# define GREEN     0x00FF00FF
+# define BLUE      0x0000FFFF
+# define YELLOW    0xFFFF00FF
+# define CYAN      0x00FFFFFF
+# define MAGENTA   0xFF00FFFF
+# define WHITE     0xFFFFFFFF
+# define BLACK     0x000000FF
+
+# define C1 BLUE
+# define C2 WHITE
 
 // -- Function prototypes --
+
+//	fdf.c
+void    fdf(t_mlx *mlx, t_map *map);
 
 //		parsing.c
 void	init_map(char *file, t_mlx *mlx, t_map *map);
@@ -88,10 +106,14 @@ void	free_mlx_exit(t_mlx *mlx);
 int		free_split(char **arr);
 int		allocate_map_grid(t_map *map);
 
-//		gridmap.c
-int		gridmap(t_map *map, int (*f)(t_map *, int, int));
+unsigned int		ip(int s, int e, int n, int n_max);
+int		dis(t_point p1, t_point p2);
 
-//		math_utils.c
-int		ip(int s, int e, int n, int n_max);
+//		color_functions.c
+unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l);
+void	get_point_colors(t_map *map);
+
+//	draw_line.c
+void	draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
 #endif

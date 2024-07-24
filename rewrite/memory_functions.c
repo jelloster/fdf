@@ -16,21 +16,24 @@ static int	free_map_grid(t_map *map, int ret);
 
 void	free_mlx_exit(t_mlx *mlx)
 {
+	/*
 	if (mlx -> mlx)
 	{
-		free (mlx -> mlx);
+		free (mlx -> mlx); // double free
 		mlx -> mlx = NULL;
-	}
+	}*/
+	mlx_terminate(mlx -> mlx);
+	/*
 	if (mlx -> img1)
 	{
-		free (mlx -> img1);
+		free (mlx -> img1); // double free
 		mlx -> img1 = NULL;
 	}
 	if (mlx -> img2)
 	{
 		free (mlx -> img2);
 		mlx -> img2 = NULL;
-	}
+	}*/
 	free_map_grid(mlx -> map, 0);
 	exit (EXIT_FAILURE);
 }
@@ -69,6 +72,8 @@ static int	free_map_grid(t_map *map, int ret)
 		}
 		free(map -> grid);
 	}
+	free (map);
+	map = NULL;
 	return (ret);
 }
 

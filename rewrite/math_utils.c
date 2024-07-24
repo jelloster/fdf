@@ -7,11 +7,23 @@
 	that is between 0 and n_max.
 */
 
-int	ip(int s, int e, int n, int n_max)
+unsigned int	ip(int s, int e, int n, int n_max)
 {
+	double	start;
+	double	end;
+	double	step;
+	double	max_step;
+	double	res;
+
+	start = (double)s;
+	end = (double)e;
+	step = (double)n;
+	max_step = (double)n_max;
+
 	if (n_max == 0)
 		return (0);
-    return (s + ((e - s) * n) / n_max);
+	res = start + ((end - start) * step) / max_step;
+	return ((unsigned int)(res + 0.5));
 }
 
 /*
@@ -19,8 +31,8 @@ int	ip(int s, int e, int n, int n_max)
 
 	Get the distance between 2 points
 */
-
-int	dis(t_point p1, t_point p2) // is this used?
+	
+int	dis(t_point p1, t_point p2)
 {
 	return (sqrt(pow((p2.res_x - p1.res_x), 2)
 	  + pow((p2.res_y - p1.res_y), 2)));

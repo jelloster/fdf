@@ -14,7 +14,7 @@
 
 static int	get_map_dimensions(int fd, t_map *map);
 static int	parse(int fd, t_map *map);
-static int	get_min_and_max(t_map *map, int h, int w);
+static void	get_min_and_max(t_map *map);
 
 void	init_map(char *file, t_mlx *mlx, t_map *map)
 {
@@ -23,7 +23,7 @@ void	init_map(char *file, t_mlx *mlx, t_map *map)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		free_mlx_exit(mlx);
-	if (access(file, R_OK) != 0 || get_map_dimensions(fd, map)
+	if (access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
 			|| map -> w == -1 ||  !allocate_map_grid(map))
 	{
 		close (fd);
@@ -39,7 +39,8 @@ void	init_map(char *file, t_mlx *mlx, t_map *map)
 		close(fd);
 		free_mlx_exit(mlx);
 	}
-	gridmap(map, &get_min_and_max);
+	get_min_and_max(map);
+	get_point_colors(map);
 }
 
 static int	get_map_dimensions(int fd, t_map *map)
@@ -99,11 +100,24 @@ static int	parse(int fd, t_map *map)
 	return (1);
 }
 
-static int	get_min_and_max(t_map *map, int h, int w)
+static void	get_min_and_max(t_map *map)
 {
-	if (map -> grid[h][w].value > map -> max)
-		map -> max = map -> grid[h][w].value;
-	if (map -> grid[h][w].value < map -> min)
-		map ->min = map -> grid[h][w].value;
-	return (1);
+	int	h;
+	int	w;
+	
+	h = 0;
+	while (h < map->h)
+	{
+		w = 0;
+		while (w < map->w)
+		{
+			if (map -> grid[h][w].value > map -> max)
+				map -> max = map -> grid[h][w].value;
+			if (map -> grid[h][w].value < map -> min)
+				map ->min = map -> grid[h][w].value;
+			w++;
+		}
+		h++;
+	}
+	map -> range = abs(map->max - map->min);
 }

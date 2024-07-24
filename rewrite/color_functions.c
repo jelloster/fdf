@@ -24,7 +24,7 @@ static void	get_point_color(t_point *point, t_map map)
 	int		G;
 	int		B;
 	
-	int x = map.max_h - point -> h;
+	int x = map.max - point -> value;
 	R = ip((C2 >> 16) & 0xFF, (C1 >> 16) & 0xFF, x, map.range);
 	G = ip((C2 >> 8) & 0xFF, (C1 >> 8) & 0xFF, x, map.range);
 	B = ip(C2 & 0xFF, C1 & 0xFF, x, map.range);
