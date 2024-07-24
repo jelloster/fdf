@@ -20,7 +20,7 @@ int	main(int ac, char *av[])
 	t_mlx	mlx;
 
 	if (ac != 2)
-{
+	{
 		ft_putstr_fd("Incorrect number of arguments.\n", 2);
 		exit(EXIT_FAILURE);
 	}
@@ -29,10 +29,7 @@ int	main(int ac, char *av[])
 	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
 		free_mlx_exit(&mlx);
 
-	// fdf();
-	// get points
-	// draw points
-	// draw lines
+	fdf(mlx);
 
 	// mlx_key_hook(mlx, &key_hook, NULL);
 	mlx_loop(mlx.mlx);
@@ -91,7 +88,17 @@ void	get_screen_coords(t_map *map, t_screen *s)
 			p = & map -> grid[h][w];
 			p->res_x = s->start_x + (w - h) * (s->half_tile_w);
 			p->res_y = s->mar_y + ((w + h) * (s->half_tile_h)) - p->value  * 2;
+			if (p->res_y > s->max_res_y)
+				s->max_res_y = p->res_y;
+			if (p->res_y < s->min_res_y)
+				s->min_res_y = p->res_y;
 		}
 	    h++;
+	}
+	// fix
+	if (s->max_res_y > RES_Y || s->min_res_y < 0)
+	{
+		ft_printf("The map is too big");
+		exit(1);
 	}
 }

@@ -50,6 +50,7 @@ typedef struct s_screen
 	int	mar_x;
 	int	mar_y;
 	int	start_x;
+	int	max_res_y;
 }	t_screen;
 
 typedef struct s_mlx
@@ -61,6 +62,16 @@ typedef struct s_mlx
 	t_screen	*s;
 
 }				t_mlx;
+
+typedef struct s_bresenhamn
+{
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
+	int t_l;
+}	t_bresenhamn;
 
 // -- Macros --
 
@@ -79,5 +90,8 @@ int		allocate_map_grid(t_map *map);
 
 //		gridmap.c
 int		gridmap(t_map *map, int (*f)(t_map *, int, int));
+
+//		math_utils.c
+int		ip(int s, int e, int n, int n_max);
 
 #endif
