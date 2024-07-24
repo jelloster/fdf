@@ -1,7 +1,6 @@
 #include "fdf.h"
 
 static void	get_point_color(t_point *point, t_map map);
-int	ip(int s, int e, int n, int n_max);
 
 void	get_point_colors(t_map *map)
 {
