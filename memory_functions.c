@@ -1,4 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memory_functions.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 18:29:54 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/22 13:26:43 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
+
+static int	free_map_grid(t_map *map, int ret);
+
+void	free_mlx_exit(t_mlx *mlx)
+{
+	/*
+	if (mlx -> mlx)
+	{
+		free (mlx -> mlx); // double free
+		mlx -> mlx = NULL;
+	}*/
+	mlx_terminate(mlx -> mlx);
+	/*
+	if (mlx -> img1)
+	{
+		free (mlx -> img1); // double free
+		mlx -> img1 = NULL;
+	}
+	if (mlx -> img2)
+	{
+		free (mlx -> img2);
+		mlx -> img2 = NULL;
+	}*/
+	free_map_grid(mlx -> map, 0);
+	exit (EXIT_FAILURE);
+}
 
 int	allocate_map_grid(t_map *map)
 {
@@ -6,19 +44,19 @@ int	allocate_map_grid(t_map *map)
 
 	map -> grid = malloc((map -> h) * (sizeof (t_map *)));
 	if (!map -> grid)
-		return (-1);
+		return (0);
 	i = 0;
 	while (i < map -> h)
 	{
 		map -> grid[i] = malloc((map -> w) * (sizeof (t_map)));
 		if (!map -> grid[i])
-			return (free_map_grid(map, -1));
+			return (free_map_grid(map, 0));
 		i++;
 	}
 	return (1);
 }
 
-int	free_map_grid(t_map *map, int ret)
+static int	free_map_grid(t_map *map, int ret)
 {
 	int	i;
 
@@ -34,6 +72,8 @@ int	free_map_grid(t_map *map, int ret)
 		}
 		free(map -> grid);
 	}
+	free (map);
+	map = NULL;
 	return (ret);
 }
 

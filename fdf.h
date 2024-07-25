@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 13:25:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/19 17:05:05 by motuomin         ###   ########.fr       */
+/*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 15:05:27 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-// --- INCLUDES ---
+
+// -- Includes --
+
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -21,101 +23,109 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include "libft/inc/libft.h"
 
-typedef unsigned int t_ui;
+// -- Typedefs --
 
 typedef struct s_point
 {
-	int		h;
-	int		x;
-	int		y;
 	int		res_x;
 	int		res_y;
-	t_ui		c;
-}			t_point;
+	int		value;
+	unsigned int	c;
+}		t_point;
 
-typedef struct	s_map
+typedef struct s_map
 {
-	int	w;
-	int	h;
-	int	max_h;
-	int	min_h;
-	int	max_x;
-	int	min_x;
-	int	range;
-	int	start;
-	t_point	**grid;
-}				t_map;
+	int		h;
+	int		w;
+	int		max;
+	int		min;
+	int		range;
+	t_point		**grid;
+}			t_map;
 
 typedef struct s_screen
 {
 	int	half_tiles;
 	int	half_tile_w;
 	int	half_tile_h;
-
-	int	t_h;
 	int	mar_x;
 	int	mar_y;
-	t_map	*map;
-	mlx_image_t	*img;
+	int	start_x;
+	int	max_res_y;
+	int	min_res_y;
 }	t_screen;
+
+typedef struct s_mlx
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img1;
+	mlx_image_t	*img2;
+	t_map		*map;
+	t_screen	s;
+
+}				t_mlx;
+
+typedef struct s_bresenhamn
+{
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
+	int t_l;
+}	t_bresenhamn;
 
 typedef enum e_dir
 {
-	LEFT,
-	RIGHT,
 	UP,
 	DOWN,
+	LEFT,
+	RIGHT,
 }	t_dir;
 
-// --- MACROS ---
+// -- Macros --
+
 # define RES_X 2000
-# define RES_Y 2500
-# define MARGIN 0
+# define RES_Y 2000
 
-#define ABS(x) ((x) < 0 ? -(x) : (x));
-
-// Colors
-#define RED       0xFF0000FF // black
-#define GREEN     0x00FF00FF // green
-#define BLUE      0x0000FFFF
-#define YELLOW    0xFFFF00FF
-#define CYAN      0x00FFFFFF // cyan
-#define MAGENTA   0xFF00FFFF // blue
-#define WHITE     0xFFFFFFFF // cyan
-#define BLACK     0x000000FF // black
+# define RED       0xFF0000FF
+# define GREEN     0x00FF00FF
+# define BLUE      0x0000FFFF
+# define YELLOW    0xFFFF00FF
+# define CYAN      0x00FFFFFF
+# define MAGENTA   0xFF00FFFF
+# define WHITE     0xFFFFFFFF
+# define BLACK     0x000000FF
 
 # define C1 BLUE
 # define C2 WHITE
 
-# define EXIT_FAILURE 1
-# define EXIT_SUCESS 0
+// -- Function prototypes --
 
-// --- FUNCTION PROTOTYPES ---
+//				fdf.c
+void			fdf(t_mlx *mlx, t_map *map);
 
-void	ft_error(void);
+//				parsing.c
+void			init_map(char *file, t_mlx *mlx, t_map *map);
 
-// memory_functions.c
-int	allocate_map_grid(t_map *map);
-int	free_map_grid(t_map *map, int ret);
-int	free_split(char **arr);
+//				memory_functions.c
+void			free_mlx_exit(t_mlx *mlx);
+int				free_split(char **arr);
+int				allocate_map_grid(t_map *map);
 
-// parsing.c
-void	init_map(char *file, t_map *map);
+//				math_utils.c
+unsigned int	ip(int s, int e, int n, int n_max);
+int				dis(t_point p1, t_point p2);
 
-// math_utils.c
-int	ip(int s, int e, int n, int n_max);
-int	dis(t_point p1, t_point p2);
-
-void	get_point_colors(t_map *map);
-
+//				color_functions.c
 unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l);
+void			get_point_colors(t_map *map);
 
-void	draw_points(mlx_image_t *img, t_map *map);
+//				draw_line.c
+void			draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
-void	draw_line(mlx_image_t *img, t_point p1, t_point p2);
-
-void	draw_lines(mlx_image_t *img, t_map *map);
-
-void	key_hook(mlx_key_data_t keydata, void *param);
+//				key_press.c
+void			key_hook(mlx_key_data_t keydata, void* param);
 
 #endif

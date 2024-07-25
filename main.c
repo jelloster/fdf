@@ -5,70 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 13:25:29 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/19 16:10:36 by motuomin         ###   ########.fr       */
+/*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
- * Hooks allow you to add your own functions to the main loop that get executed
- * every frame. Only one hook can be set at a time.
- */
+static void	init_mlx(t_mlx *mlx);
 
 int	main(int ac, char *av[])
 {
-	mlx_t		*mlx;
-	t_map		map;
-	mlx_image_t	*img;
-	mlx_image_t	*img2;
+	t_mlx	mlx;
 
-	if (ac == 2 && access(av[1], R_OK) == 0)
-		init_map(av[1], &map);
-	else
+	if (ac != 2)
 	{
-		if (ac != 2)
-			ft_putstr_fd("Incorrect amount of arguments.\n", 2);
-		else
-		{
-			ft_putstr_fd(av[1], 2);
-			ft_putstr_fd(": Map not accessible\n", 2);
-		}
-		return (EXIT_FAILURE);
+		ft_putstr_fd("Incorrect number of arguments.\n", 2);
+		exit(EXIT_FAILURE);
 	}
+	init_mlx(&mlx);
+	init_map(av[1], &mlx, mlx.map);
 
-	// Initialize and run a new window instance with resize ability
-	mlx = mlx_init(RES_X, RES_Y, "fdf", true);
-	if (!mlx)
-		ft_error();
-
-	// Create an image with n x n resolution
-	img = mlx_new_image(mlx, RES_X, RES_Y);
-	img2 = mlx_new_image(mlx, RES_X, RES_Y);
-
-	// Set all pixels to white
-	//ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	//
-	for (uint32_t y = 0; y < img->height; y++) {
-		for (uint32_t x = 0; x < img->width; x++) {
-		    mlx_put_pixel(img, x, y, 0x00008B);
+	for (uint32_t y = 0; y < mlx.img1->height; y++) {
+		for (uint32_t x = 0; x < mlx.img1->width; x++) 
+		    mlx_put_pixel(mlx.img1, x, y, 0x00008B);
         }
-    }
 
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
+	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
+		free_mlx_exit(&mlx);
+	fdf(&mlx, mlx.map);
+	mlx_key_hook(mlx.mlx, &key_hook, NULL);
+	mlx_loop(mlx.mlx);
+	mlx_terminate(mlx.mlx);
+	//free_mlx_exit(&mlx); // make return EXIT_SUCCESS // double free
+}
 
-	draw_points(img, &map);
-//	draw_line(img, map.grid[0][0], map.grid[map.h-1][map.w-1]);
-	draw_lines(img, &map);
-
-	mlx_key_hook(mlx, &key_hook, NULL);
-
-	// Run the main loop and terminate on quit
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	if (ac == 2)
-		free_map_grid(&map, 0);
-	return (EXIT_SUCCESS);
+static void	init_mlx(t_mlx *mlx)
+{
+	mlx -> mlx = mlx_init(RES_X, RES_Y, "fdf", true);
+	if (!mlx)
+		exit(EXIT_FAILURE);
+	mlx -> img1 = mlx_new_image(mlx -> mlx, RES_X, RES_Y);
+	if (!mlx -> img1)
+		free_mlx_exit(mlx);
+	mlx -> img2 = mlx_new_image(mlx -> mlx, RES_X, RES_Y);
+	if (!mlx -> img2)
+		free_mlx_exit(mlx);
+	mlx -> map = malloc(sizeof(t_map));
 }

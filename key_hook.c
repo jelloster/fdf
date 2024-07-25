@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 14:55:31 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/04 14:55:32 by motuomin         ###   ########.fr       */
+/*   Created: 2024/07/25 14:54:09 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 14:57:50 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_error(void)
+void	key_hook(mlx_key_data_t keydata, void* param)
 {
-		ft_putstr_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
-		exit(EXIT_FAILURE);
+	void	*ptr;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		exit(EXIT_SUCCESS); // free memory
+	ptr = param; // remove
 }
