@@ -25,16 +25,10 @@ int	main(int ac, char *av[])
 	}
 	init_mlx(&mlx);
 	init_map(av[1], &mlx, mlx.map);
-
-	for (uint32_t y = 0; y < mlx.img1->height; y++) {
-		for (uint32_t x = 0; x < mlx.img1->width; x++) 
-		    mlx_put_pixel(mlx.img1, x, y, 0x00008B);
-        }
-
 	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
 		free_mlx_exit(&mlx);
 	fdf(&mlx, mlx.map);
-	mlx_key_hook(mlx.mlx, &key_hook, NULL);
+	mlx_key_hook(mlx.mlx, &key_hook, &mlx);
 	mlx_loop(mlx.mlx);
 	mlx_terminate(mlx.mlx);
 	//free_mlx_exit(&mlx); // make return EXIT_SUCCESS // double free

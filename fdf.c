@@ -1,6 +1,5 @@
 #include "fdf.h"
 
-static void	draw_map(t_mlx *mlx, t_map *map);
 static void	get_screen_info(t_map *map, t_screen *s);
 static void	get_screen_coords(t_map *map, t_screen *s);
 
@@ -28,7 +27,7 @@ static void	get_screen_info(t_map *map, t_screen *s)
 	else
 		s -> half_tile_w = RES_X / s -> half_tiles;
 	if (s -> half_tile_w < 2)
-		s -> half_tile_w = 2; // added
+		s -> half_tile_w = 2;
 	s -> half_tile_h = s -> half_tile_w * tan(M_PI / 6);
 	s -> start_x = map -> h * s -> half_tile_w + left_over_width;
 	// kusee kai joskus
@@ -40,9 +39,13 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 {
 	int	h;
 	int	w;
+	int	h_multip;
 	t_point	*p;
 
 	h = 0;
+	h_multip = s->half_tile_h / 2;
+	if (h_multip < 1)
+		h_multip = 1;
 	while (h < map->h)
 	{
 		w = -1;
@@ -51,7 +54,7 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 			p = & map -> grid[h][w];
 			p->res_x = s->start_x + (w - h) * (s->half_tile_w);
 			p->res_y = s->mar_y + ((w + h) 
-				* (s->half_tile_h)) - p->value  * 2;
+				* (s->half_tile_h)) - p->value * h_multip;
 			if (p->res_y > s->max_res_y)
 				s->max_res_y = p->res_y;
 			if (p->res_y < s->min_res_y)
@@ -59,17 +62,9 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 		}
 		h++;
 	}
-	// fix
-	/*
-	if (s->max_res_y > RES_Y || s->min_res_y < 0)
-	{
-		ft_printf("The map is too big\n");
-		exit(1);
-	}
-	*/
 }
 
-static void    draw_map(t_mlx *mlx, t_map *map)
+void    draw_map(t_mlx *mlx, t_map *map)
 {
 	int	h;
 	int	w;
@@ -77,6 +72,7 @@ static void    draw_map(t_mlx *mlx, t_map *map)
 
 	img = mlx -> img1;
 	h = 0;
+	background_color(mlx, BG_C);
 	while (h < map->h)
 	{
 		w = 0;

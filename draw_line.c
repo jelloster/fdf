@@ -12,7 +12,7 @@ void draw_line(mlx_image_t *img, t_point p1, t_point p2)
 	{
 		if (p1.res_x <= RES_X && p1.res_y <= RES_Y
 			&& p1.res_x > 0 && p1.res_y > 0)
-			mlx_put_pixel(img, p1.res_x, p1.res_y, get_gradient_color(p1, p2, b.t_l));
+			mlx_put_pixel(img, p1.res_x, p1.res_y, get_gradient_color(p1, p2, b.t_l)); // seg fault when moving julia
 		if (p1.res_x == p2.res_x && p1.res_y == p2.res_y)
 			break;
 		b.e2 = b.err * 2;

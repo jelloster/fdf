@@ -62,7 +62,6 @@ typedef struct s_mlx
 	mlx_image_t	*img2;
 	t_map		*map;
 	t_screen	s;
-
 }				t_mlx;
 
 typedef struct s_bresenhamn
@@ -86,8 +85,10 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X 2000
-# define RES_Y 2000
+# define RES_X 1000
+# define RES_Y 1000
+
+# define MOVE_AMOUNT (RES_X / 10)
 
 # define RED       0xFF0000FF
 # define GREEN     0x00FF00FF
@@ -100,6 +101,7 @@ typedef enum e_dir
 
 # define C1 BLUE
 # define C2 WHITE
+# define BG_C 0x00008B
 
 // -- Function prototypes --
 
@@ -127,5 +129,16 @@ void			draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
 //				key_press.c
 void			key_hook(mlx_key_data_t keydata, void* param);
+
+//				move.c
+void			move(t_mlx *mlx, t_dir dir);
+
+
+void    draw_map(t_mlx *mlx, t_map *map);
+
+void	zoom_in(t_mlx *mlx);
+void	zoom_out(t_mlx *mlx);
+
+void	background_color(t_mlx *mlx, unsigned int color);
 
 #endif
