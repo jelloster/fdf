@@ -26,12 +26,12 @@ int	main(int ac, char *av[])
 	init_mlx(&mlx);
 	init_map(av[1], &mlx, mlx.map);
 	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
-		free_mlx_exit(&mlx);
+		free_mlx_exit(&mlx, EXIT_FAILURE);
 	fdf(&mlx, mlx.map);
 	mlx_key_hook(mlx.mlx, &key_hook, &mlx);
 	mlx_loop(mlx.mlx);
 	mlx_terminate(mlx.mlx);
-	//free_mlx_exit(&mlx); // make return EXIT_SUCCESS // double free
+	free_mlx_exit(&mlx, EXIT_SUCCESS);
 }
 
 static void	init_mlx(t_mlx *mlx)
@@ -41,9 +41,6 @@ static void	init_mlx(t_mlx *mlx)
 		exit(EXIT_FAILURE);
 	mlx -> img1 = mlx_new_image(mlx -> mlx, RES_X, RES_Y);
 	if (!mlx -> img1)
-		free_mlx_exit(mlx);
-	mlx -> img2 = mlx_new_image(mlx -> mlx, RES_X, RES_Y);
-	if (!mlx -> img2)
-		free_mlx_exit(mlx);
+		free_mlx_exit(mlx, EXIT_FAILURE);
 	mlx -> map = malloc(sizeof(t_map));
 }

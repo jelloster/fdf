@@ -41,7 +41,7 @@ unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l)
 	int		l;
 
 	l = dis(p1, p2);
-	newR = ip((p2.c >> 16) & 0xFF, (p1.c >> 16) & 0xFF, l, t_l); // ?
+	newR = ip((p2.c >> 16) & 0xFF, (p1.c >> 16) & 0xFF, l, t_l);
 	newG = ip((p2.c >> 8) & 0xFF,(p1.c >> 8) & 0xFF,  l, t_l);
 	newB = ip(p2.c & 0xFF, p1.c & 0xFF, l, t_l);
 	color = (newR << 16) | (newG << 8) | newB;

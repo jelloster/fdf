@@ -25,6 +25,7 @@ void	move(t_mlx *mlx, t_dir dir)
 		{
 			mlx -> map -> grid[h][w].res_x += dx * MOVE_AMOUNT;
 			mlx -> map -> grid[h][w].res_y += dy * MOVE_AMOUNT;
+			// draw_pixel at the same time?
 		}
 	}
 }

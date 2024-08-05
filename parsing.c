@@ -22,22 +22,22 @@ void	init_map(char *file, t_mlx *mlx, t_map *map)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		free_mlx_exit(mlx);
+		free_mlx_exit(mlx, EXIT_FAILURE);
 	if (access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
 		|| map -> w == -1 ||  !allocate_map_grid(map))
 	{
 		close (fd);
 		ft_putstr_fd("Map error.\n", 2);
-		free_mlx_exit(mlx);
+		free_mlx_exit(mlx, EXIT_FAILURE);
 	}
 	close (fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		free_mlx_exit(mlx);
+		free_mlx_exit(mlx, EXIT_FAILURE);
 	if (!parse(fd, map))
 	{
 		close(fd);
-		free_mlx_exit(mlx);
+		free_mlx_exit(mlx, EXIT_FAILURE);
 	}
 	get_min_and_max(map);
 	get_point_colors(map);

@@ -59,7 +59,6 @@ typedef struct s_mlx
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img1;
-	mlx_image_t	*img2;
 	t_map		*map;
 	t_screen	s;
 }				t_mlx;
@@ -85,8 +84,8 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X 1000
-# define RES_Y 1000
+# define RES_X 1300
+# define RES_Y 700
 
 # define MOVE_AMOUNT (RES_X / 10)
 
@@ -112,7 +111,7 @@ void			fdf(t_mlx *mlx, t_map *map);
 void			init_map(char *file, t_mlx *mlx, t_map *map);
 
 //				memory_functions.c
-void			free_mlx_exit(t_mlx *mlx);
+void			free_mlx_exit(t_mlx *mlx, int ret);
 int				free_split(char **arr);
 int				allocate_map_grid(t_map *map);
 
@@ -133,12 +132,14 @@ void			key_hook(mlx_key_data_t keydata, void* param);
 //				move.c
 void			move(t_mlx *mlx, t_dir dir);
 
-
+//	main.c
 void    draw_map(t_mlx *mlx, t_map *map);
 
+//	zoom.c
 void	zoom_in(t_mlx *mlx);
 void	zoom_out(t_mlx *mlx);
 
+//	background.c
 void	background_color(t_mlx *mlx, unsigned int color);
 
 #endif

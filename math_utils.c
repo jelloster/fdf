@@ -9,21 +9,12 @@
 
 unsigned int	ip(int s, int e, int n, int n_max)
 {
-	double	start;
-	double	end;
-	double	step;
-	double	max_step;
-	double	res;
-
-	start = (double)s;
-	end = (double)e;
-	step = (double)n;
-	max_step = (double)n_max;
+	double ratio;
 
 	if (n_max == 0)
-		return (0);
-	res = start + ((end - start) * step) / max_step;
-	return ((unsigned int)(res + 0.5));
+		return (s);
+	ratio = (double)n / (double)n_max;
+	return ((unsigned int)(s + ratio * (e - s) + 0.5));
 }
 
 /*
