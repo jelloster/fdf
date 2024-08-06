@@ -30,7 +30,6 @@ static void	get_screen_info(t_map *map, t_screen *s)
 		s -> half_tile_w = 2;
 	s -> half_tile_h = s -> half_tile_w * tan(M_PI / 6);
 	s -> start_x = map -> h * s -> half_tile_w + left_over_width;
-	// kusee kai joskus
 	s->mar_x = (RES_X - s -> half_tiles * s -> half_tile_w) / 2;
 	s->mar_y = (RES_Y - s -> half_tiles * s -> half_tile_h) / 2;
 }

@@ -32,7 +32,7 @@ static void	get_point_color(t_point *point, t_map map)
 	point -> c = color;
 }
 
-unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l)
+unsigned int	gradient(t_point p1, t_point p2, int t_l)
 {
 	unsigned int	color;
 	int		newR;

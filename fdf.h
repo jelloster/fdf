@@ -65,13 +65,14 @@ typedef struct s_mlx
 
 typedef struct s_bresenhamn
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
-	int t_l;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+	int	t_l;
+	unsigned int	color;
 }	t_bresenhamn;
 
 typedef enum e_dir
@@ -120,7 +121,7 @@ unsigned int	ip(int s, int e, int n, int n_max);
 int				dis(t_point p1, t_point p2);
 
 //				color_functions.c
-unsigned int	get_gradient_color(t_point p1, t_point p2, int t_l);
+unsigned int	gradient(t_point p1, t_point p2, int t_l);
 void			get_point_colors(t_map *map);
 
 //				draw_line.c
