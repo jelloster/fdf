@@ -1,28 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static void init_struct(t_bresenhamn *b, t_point p1, t_point p2);
-
-#include <stdio.h> // delete this
+static void	init_struct(t_bresenhamn *b, t_point p1, t_point p2);
 
 // Bresenhamn's line algorithm
-void draw_line(mlx_image_t *img, t_point p1, t_point p2)
+void	draw_line(mlx_image_t *img, t_point p1, t_point p2)
 {
-	t_bresenhamn b;
+	t_bresenhamn	b;
 
 	init_struct(&b, p1, p2);
 	while (1)
 	{
-		/*
-		printf("pointer %p\n", img);
-		printf("res_x %d\n", p1.res_x);
-		printf("res_y %d\n", p1.res_y);
-		printf("color %d\n", b.color);
-		*/
 		if (p1.res_x < RES_X && p1.res_y < RES_Y
 			&& p1.res_x > 0 && p1.res_y > 0)
-			mlx_put_pixel(img, p1.res_x, p1.res_y, b.color); // seg fault when moving julia (res_x 1298 res_y 700)
+			mlx_put_pixel(img, p1.res_x, p1.res_y, b.color);
 		if (p1.res_x == p2.res_x && p1.res_y == p2.res_y)
-			break;
+			break ;
 		b.e2 = b.err * 2;
 		if (b.e2 > -b.dy)
 		{
@@ -37,9 +41,9 @@ void draw_line(mlx_image_t *img, t_point p1, t_point p2)
 	}
 }
 
-static void init_struct(t_bresenhamn *b, t_point p1, t_point p2)
+static void	init_struct(t_bresenhamn *b, t_point p1, t_point p2)
 {
-	b->dx = abs(p2.res_x - p1.res_x); 
+	b->dx = abs(p2.res_x - p1.res_x);
 	b->dy = abs(p2.res_y - p1.res_y);
 	if (p1.res_x < p2.res_x)
 		b->sx = 1;

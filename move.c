@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	move(t_mlx *mlx, t_dir dir)
@@ -25,7 +37,6 @@ void	move(t_mlx *mlx, t_dir dir)
 		{
 			mlx -> map -> grid[h][w].res_x += dx * MOVE_AMOUNT;
 			mlx -> map -> grid[h][w].res_y += dy * MOVE_AMOUNT;
-			// draw_pixel at the same time?
 		}
 	}
 }

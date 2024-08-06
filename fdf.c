@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static void	get_screen_info(t_map *map, t_screen *s);
@@ -36,9 +48,9 @@ static void	get_screen_info(t_map *map, t_screen *s)
 
 static void	get_screen_coords(t_map *map, t_screen *s)
 {
-	int	h;
-	int	w;
-	int	h_multip;
+	int		h;
+	int		w;
+	int		h_multip;
 	t_point	*p;
 
 	h = 0;
@@ -52,7 +64,7 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 		{
 			p = & map -> grid[h][w];
 			p->res_x = s->start_x + (w - h) * (s->half_tile_w);
-			p->res_y = s->mar_y + ((w + h) 
+			p->res_y = s->mar_y + ((w + h) \
 				* (s->half_tile_h)) - p->value * h_multip;
 			if (p->res_y > s->max_res_y)
 				s->max_res_y = p->res_y;
@@ -63,11 +75,11 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 	}
 }
 
-void    draw_map(t_mlx *mlx, t_map *map)
+void	draw_map(t_mlx *mlx, t_map *map)
 {
-	int	h;
-	int	w;
-	mlx_image_t *img;
+	int			h;
+	int			w;
+	mlx_image_t	*img;
 
 	img = mlx -> img1;
 	h = 0;

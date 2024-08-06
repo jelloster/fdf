@@ -27,9 +27,9 @@
 
 typedef struct s_point
 {
-	int		res_x;
-	int		res_y;
-	int		value;
+	int				res_x;
+	int				res_y;
+	int				value;
 	unsigned int	c;
 }		t_point;
 
@@ -40,7 +40,7 @@ typedef struct s_map
 	int		max;
 	int		min;
 	int		range;
-	t_point		**grid;
+	t_point	**grid;
 }			t_map;
 
 typedef struct s_screen
@@ -65,13 +65,13 @@ typedef struct s_mlx
 
 typedef struct s_bresenhamn
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-	int	t_l;
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				err;
+	int				e2;
+	int				t_l;
 	unsigned int	color;
 }	t_bresenhamn;
 
@@ -88,7 +88,7 @@ typedef enum e_dir
 # define RES_X 1300
 # define RES_Y 700
 
-# define MOVE_AMOUNT (RES_X / 10)
+# define MOVE_AMOUNT 15
 
 # define RED       0xFF0000FF
 # define GREEN     0x00FF00FF
@@ -128,19 +128,19 @@ void			get_point_colors(t_map *map);
 void			draw_line(mlx_image_t *img, t_point p1, t_point p2);
 
 //				key_press.c
-void			key_hook(mlx_key_data_t keydata, void* param);
+void			key_hook(mlx_key_data_t keydata, void *param);
 
 //				move.c
 void			move(t_mlx *mlx, t_dir dir);
 
 //	main.c
-void    draw_map(t_mlx *mlx, t_map *map);
+void			draw_map(t_mlx *mlx, t_map *map);
 
 //	zoom.c
-void	zoom_in(t_mlx *mlx);
-void	zoom_out(t_mlx *mlx);
+void			zoom_in(t_mlx *mlx);
+void			zoom_out(t_mlx *mlx);
 
 //	background.c
-void	background_color(t_mlx *mlx, unsigned int color);
+void			background_color(t_mlx *mlx, unsigned int color);
 
 #endif

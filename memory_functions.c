@@ -17,13 +17,6 @@ static int	free_map_grid(t_map *map, int ret);
 void	free_mlx_exit(t_mlx *mlx, int ret)
 {
 	mlx_terminate(mlx -> mlx);
-	/*
-	if (mlx -> img1)
-	{
-		mlx_destroy_image(mlx->mlx, mlx->img1);
-		mlx -> img1 = NULL;
-	}
-	*/
 	free_map_grid(mlx -> map, 0);
 	exit (ret);
 }

@@ -12,13 +12,13 @@
 
 #include "fdf.h"
 
-void	key_hook(mlx_key_data_t keydata, void* param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(EXIT_SUCCESS); // free memory
+		free_mlx_exit(mlx, EXIT_SUCCESS);
 	else if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
 		move(mlx, UP);
 	else if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)

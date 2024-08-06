@@ -24,7 +24,7 @@ void	init_map(char *file, t_mlx *mlx, t_map *map)
 	if (fd == -1)
 		free_mlx_exit(mlx, EXIT_FAILURE);
 	if (access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
-		|| map -> w == -1 ||  !allocate_map_grid(map))
+		|| map -> w == -1 || !allocate_map_grid(map))
 	{
 		close (fd);
 		ft_putstr_fd("Map error.\n", 2);
