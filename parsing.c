@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 14:49:14 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:55:44 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,46 @@
 static int	get_map_dimensions(int fd, t_map *map);
 static int	parse(int fd, t_map *map);
 static void	get_min_and_max(t_map *map);
+static int file_name(char *file);
 
-void	init_map(char *file, t_mlx *mlx, t_map *map)
+int	init_map(char *file, t_map *map)
 {
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		free_mlx_exit(mlx, EXIT_FAILURE);
-	if (access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
-		|| map -> w == -1 || !allocate_map_grid(map))
+	if (fd == -1 || access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
+		|| map -> w == -1 || !allocate_map_grid(map) || !file_name(file))
 	{
-		close (fd);
-		ft_putstr_fd("Map error.\n", 2);
-		free_mlx_exit(mlx, EXIT_FAILURE);
+		if (fd != -1)
+			close (fd);
+		return (0);
 	}
 	close (fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		free_mlx_exit(mlx, EXIT_FAILURE);
+		return (0);
 	if (!parse(fd, map))
 	{
 		close(fd);
-		free_mlx_exit(mlx, EXIT_FAILURE);
+		return (0);
 	}
+	close(fd);
 	get_min_and_max(map);
 	get_point_colors(map);
+	return (1);
+}
+
+static int file_name(char *file)
+{
+	if (ft_strlen(file) < 4)
+		return 0;
+	if (ft_strlen(file) == 4)
+		if (ft_strncmp(file, ".fdf", ft_strlen(file)) != 0)
+				return (0);
+	file += ft_strlen(file) - 4;
+	if (ft_strncmp(file, ".fdf", ft_strlen(file)) != 0)
+		return (0);
+	return (1);
 }
 
 static int	get_map_dimensions(int fd, t_map *map)
@@ -50,7 +64,7 @@ static int	get_map_dimensions(int fd, t_map *map)
 	int		temp_w;
 
 	line = get_next_line(fd);
-	map -> w = -1;
+	map -> w = -1; // seg fault
 	map -> h = 0;
 	while (line)
 	{

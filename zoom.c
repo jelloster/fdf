@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:25:17 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	zoom_out(t_mlx *mlx)
 	int		w;
 	t_map	*map;
 
-	if (mlx -> s.half_tile_w / 2 <= 1)
+	if (mlx -> s.half_tile_w / 2 <= 3)
 		return ;
 	h = -1;
 	map = mlx -> map;

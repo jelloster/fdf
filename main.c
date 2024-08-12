@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:54:52 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int ac, char *av[])
 		ft_putstr_fd("Incorrect number of arguments.\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	init_map(av[1], mlx.map);
 	init_mlx(&mlx);
-	init_map(av[1], &mlx, mlx.map);
 	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
 		free_mlx_exit(&mlx, EXIT_FAILURE);
 	fdf(&mlx, mlx.map);

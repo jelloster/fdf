@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 15:05:27 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:54:32 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X 1300
-# define RES_Y 700
+# define RES_X 3000
+# define RES_Y 2000
 
 # define MOVE_AMOUNT 15
 
@@ -109,7 +109,7 @@ typedef enum e_dir
 void			fdf(t_mlx *mlx, t_map *map);
 
 //				parsing.c
-void			init_map(char *file, t_mlx *mlx, t_map *map);
+int				init_map(char *file, t_map *map);
 
 //				memory_functions.c
 void			free_mlx_exit(t_mlx *mlx, int ret);
