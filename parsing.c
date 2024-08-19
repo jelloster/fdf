@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/08/12 12:55:44 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:33:00 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	get_map_dimensions(int fd, t_map *map);
 static int	parse(int fd, t_map *map);
 static void	get_min_and_max(t_map *map);
-static int file_name(char *file);
+static int	file_name(char *file);
 
 int	init_map(char *file, t_map *map)
 {
@@ -44,13 +44,13 @@ int	init_map(char *file, t_map *map)
 	return (1);
 }
 
-static int file_name(char *file)
+static int	file_name(char *file)
 {
 	if (ft_strlen(file) < 4)
-		return 0;
+		return (0);
 	if (ft_strlen(file) == 4)
 		if (ft_strncmp(file, ".fdf", ft_strlen(file)) != 0)
-				return (0);
+			return (0);
 	file += ft_strlen(file) - 4;
 	if (ft_strncmp(file, ".fdf", ft_strlen(file)) != 0)
 		return (0);
@@ -64,7 +64,7 @@ static int	get_map_dimensions(int fd, t_map *map)
 	int		temp_w;
 
 	line = get_next_line(fd);
-	map -> w = -1; // seg fault
+	map -> w = -1;
 	map -> h = 0;
 	while (line)
 	{

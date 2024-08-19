@@ -6,7 +6,8 @@ SANITIZE_FLAGS	:=	-g -fsanitize=address
 CC				:=	cc
 
 SRC_FILES		:=	main.c parsing.c memory_functions.c key_hook.c			\
-					color_functions.c fdf.c draw_line.c math_utils.c move.c background.c zoom.c
+					color_functions.c fdf.c draw_line.c math_utils.c move.c \
+					background.c zoom.c
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 NAME			:=	fdf
 LIBFT			:=	libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/08/12 12:54:32 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:34:17 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,37 @@ typedef struct s_point
 	int				res_y;
 	int				value;
 	unsigned int	c;
-}		t_point;
+}					t_point;
 
 typedef struct s_map
 {
-	int		h;
-	int		w;
-	int		max;
-	int		min;
-	int		range;
-	t_point	**grid;
-}			t_map;
+	int				h;
+	int				w;
+	int				max;
+	int				min;
+	int				range;
+	t_point			**grid;
+}					t_map;
 
 typedef struct s_screen
 {
-	int	half_tiles;
-	int	half_tile_w;
-	int	half_tile_h;
-	int	mar_x;
-	int	mar_y;
-	int	start_x;
-	int	max_res_y;
-	int	min_res_y;
-}	t_screen;
+	int				half_tiles;
+	int				half_tile_w;
+	int				half_tile_h;
+	int				mar_x;
+	int				mar_y;
+	int				start_x;
+	int				max_res_y;
+	int				min_res_y;
+}					t_screen;
 
 typedef struct s_mlx
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img1;
-	t_map		*map;
-	t_screen	s;
-}				t_mlx;
+	mlx_t			*mlx;
+	mlx_image_t		*img1;
+	t_map			*map;
+	t_screen		s;
+}					t_mlx;
 
 typedef struct s_bresenhamn
 {
@@ -85,25 +85,19 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X 700
-# define RES_Y 500
+# define RES_X		2500
+# define RES_Y		1500
 
-# define MOVE_AMOUNT 15
+# define MOVE_AMOUNT 100
 
-# define RED       0xFF0000FF
-# define GREEN     0x00FF00FF
-# define BLUE      0x0000FFFF
-# define YELLOW    0xFFFF00FF
-# define CYAN      0x00FFFFFF
-# define MAGENTA   0xFF00FFFF
-# define WHITE     0xFFFFFFFF
-# define BLACK     0x000000FF
+# define BLUE		0x0000FFFF
+# define WHITE		0xFFFFFFFF
 
-# define C1 BLUE
-# define C2 WHITE
-# define BG_C 0x00008B
+# define C1			BLUE
+# define C2			WHITE
+# define BG_C		0x00008B
 
-// -- Function prototypes --
+//				-- Function prototypes --
 
 //				fdf.c
 void			fdf(t_mlx *mlx, t_map *map);
@@ -136,11 +130,11 @@ void			move(t_mlx *mlx, t_dir dir);
 //	main.c
 void			draw_map(t_mlx *mlx, t_map *map);
 
-//	zoom.c
+//				zoom.c
 void			zoom_in(t_mlx *mlx);
 void			zoom_out(t_mlx *mlx);
 
-//	background.c
+//				background.c
 void			background_color(t_mlx *mlx, unsigned int color);
 
 #endif
