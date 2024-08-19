@@ -85,8 +85,8 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X 3000
-# define RES_Y 2000
+# define RES_X 700
+# define RES_Y 500
 
 # define MOVE_AMOUNT 15
 

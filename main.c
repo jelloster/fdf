@@ -23,14 +23,21 @@ int	main(int ac, char *av[])
 		ft_putstr_fd("Incorrect number of arguments.\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	init_map(av[1], mlx.map);
+	mlx.map = malloc(sizeof(t_map));
+	if (!mlx.map)
+		exit(EXIT_FAILURE);
+	if (!init_map(av[1], mlx.map))
+	{
+		ft_putstr_fd("Map error.\n", 2);
+		free(mlx.map);
+		exit(EXIT_FAILURE);
+	}
 	init_mlx(&mlx);
 	if (mlx_image_to_window(mlx.mlx, mlx.img1, 0, 0) < 0)
 		free_mlx_exit(&mlx, EXIT_FAILURE);
 	fdf(&mlx, mlx.map);
 	mlx_key_hook(mlx.mlx, &key_hook, &mlx);
 	mlx_loop(mlx.mlx);
-	mlx_terminate(mlx.mlx);
 	free_mlx_exit(&mlx, EXIT_SUCCESS);
 }
 
@@ -42,5 +49,4 @@ static void	init_mlx(t_mlx *mlx)
 	mlx -> img1 = mlx_new_image(mlx -> mlx, RES_X, RES_Y);
 	if (!mlx -> img1)
 		free_mlx_exit(mlx, EXIT_FAILURE);
-	mlx -> map = malloc(sizeof(t_map));
 }

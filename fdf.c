@@ -55,6 +55,7 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 
 	h = 0;
 	h_multip = s->half_tile_h / 2;
+	//h_multip = RES_Y / map -> range;
 	if (h_multip < 1)
 		h_multip = 1;
 	while (h < map->h)
