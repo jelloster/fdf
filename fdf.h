@@ -51,8 +51,6 @@ typedef struct s_screen
 	int				mar_x;
 	int				mar_y;
 	int				start_x;
-	int				max_res_y;
-	int				min_res_y;
 }					t_screen;
 
 typedef struct s_mlx
