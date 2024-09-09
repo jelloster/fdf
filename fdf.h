@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/08/19 12:34:17 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:23:22 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_screen
 	int				mar_x;
 	int				mar_y;
 	int				start_x;
+	int				max_res_y;
+	int				min_res_y;
 }					t_screen;
 
 typedef struct s_mlx
@@ -71,7 +73,15 @@ typedef struct s_bresenhamn
 	int				e2;
 	int				t_l;
 	unsigned int	color;
-}	t_bresenhamn;
+}					t_bresenhamn;
+
+typedef struct s_color
+{
+	int	r;
+	int	b;
+	int	g;
+	int	a;
+}					t_color;
 
 typedef enum e_dir
 {
@@ -83,17 +93,19 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X		2500
-# define RES_Y		1500
+# define RES_X		2900
+# define RES_Y		2000
 
 # define MOVE_AMOUNT 100
 
-# define BLUE		0x0000FFFF
-# define WHITE		0xFFFFFFFF
+//					0xRRGGBBAA
+# define RED        0xFF0000FF
+# define BLUE       0x0000FFFF
+# define BLACK		0x00000FF
 
 # define C1			BLUE
-# define C2			WHITE
-# define BG_C		0x00008B
+# define C2			RED
+# define BG_C		BLACK
 
 //				-- Function prototypes --
 
@@ -114,7 +126,7 @@ int				dis(t_point p1, t_point p2);
 
 //				color_functions.c
 unsigned int	gradient(t_point p1, t_point p2, int t_l);
-void			get_point_colors(t_map *map);
+void			get_point_color(t_point *point, t_map map);
 
 //				draw_line.c
 void			draw_line(mlx_image_t *img, t_point p1, t_point p2);
@@ -125,7 +137,7 @@ void			key_hook(mlx_key_data_t keydata, void *param);
 //				move.c
 void			move(t_mlx *mlx, t_dir dir);
 
-//	main.c
+//				main.c
 void			draw_map(t_mlx *mlx, t_map *map);
 
 //				zoom.c

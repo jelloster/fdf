@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:44:54 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ unsigned int	ip(int s, int e, int n, int n_max)
 
 int	dis(t_point p1, t_point p2)
 {
-	int	a;
-	int	b;
+	int	res;
 
-	a = sqrt(pow((p2.res_x - p1.res_x), 2));
-	b = pow((p2.res_y - p1.res_y), 2);
-	return (a + b);
+	res = sqrt(pow(p2.res_x - p1.res_x, 2) + pow(p2.res_y - p1.res_y, 2));
+	return (res);
 }

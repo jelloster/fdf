@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/08/19 12:33:00 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:10:08 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_map(char *file, t_map *map)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
-		|| map -> w == -1 || !allocate_map_grid(map) || !file_name(file))
+		|| map -> w == -1 || !file_name(file) || !allocate_map_grid(map))
 	{
 		if (fd != -1)
 			close (fd);
@@ -40,7 +40,6 @@ int	init_map(char *file, t_map *map)
 	}
 	close(fd);
 	get_min_and_max(map);
-	get_point_colors(map);
 	return (1);
 }
 
@@ -119,6 +118,8 @@ static void	get_min_and_max(t_map *map)
 	int	h;
 	int	w;
 
+	map -> max = map -> grid[0][0].value;
+	map -> min = map -> grid[0][0].value;
 	h = 0;
 	while (h < map->h)
 	{

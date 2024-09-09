@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/25 15:00:11 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:44:42 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	draw_line(mlx_image_t *img, t_point p1, t_point p2)
 			b.err += b.dx;
 			p1.res_y += b.sy;
 		}
+		b.color = gradient(p1, p2, b.t_l);
 	}
 }
 

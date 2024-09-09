@@ -46,6 +46,9 @@ fclean: clean
 	rm -f $(NAME)
 	@rm -rf $(MLX)/build
 
+.PHONY: bonus
+bonus : all
+
 .PHONY: re
 re: fclean all
 
