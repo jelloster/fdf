@@ -31,24 +31,26 @@ LIBFT		:=	libft/libft.a
 LIBMLX		:=	MLX42/build/libmlx42.a
 MLX		:=	./MLX42
 HEADERS		:=	-I $(MLX)/include -I libft/inc
-
 LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # -------------RULES--------------
 
+# Ensure MLX42 is cloned and built before compiling
+$(OBJ_FILES): $(LIBMLX)
+
 $(NAME): $(OBJ_FILES) $(LIBFT) $(LIBMLX)
 	$(CC) $(FLAGS) $(OBJ_FILES) $(LIBFT) $(LIBS) -o $@
+
+$(LIBMLX): mlx_clone
+	@if [ ! -f "$(LIBMLX)" ]; then \
+		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
+	fi
 
 $(OBJ_FILES): %.o : %.c
 	$(CC) $(FLAGS) -c $< -o $@ $(HEADERS)
 
 $(LIBFT):
 	@make -C libft
-
-$(LIBMLX): mlx_clone
-	@if [ ! -f "$(LIBMLX)" ]; then \
-		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
-	fi
 
 # ----------- PHONIES ------------
 
