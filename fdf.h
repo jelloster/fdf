@@ -119,6 +119,7 @@ int				init_map(char *file, t_map *map);
 void			free_mlx_exit(t_mlx *mlx, int ret);
 int				free_split(char **arr);
 int				allocate_map_grid(t_map *map);
+int				free_map_grid(t_map *map, int ret);
 
 //				math_utils.c
 unsigned int	ip(int s, int e, int n, int n_max);

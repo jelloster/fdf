@@ -29,7 +29,8 @@ int	main(int ac, char *av[])
 	if (!init_map(av[1], mlx.map))
 	{
 		ft_putstr_fd("Map error.\n", 2);
-		free(mlx.map);
+		if (mlx.map)
+			free(mlx.map);
 		exit(EXIT_FAILURE);
 	}
 	init_mlx(&mlx);

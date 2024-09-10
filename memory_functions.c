@@ -12,8 +12,6 @@
 
 #include "fdf.h"
 
-static int	free_map_grid(t_map *map, int ret);
-
 void	free_mlx_exit(t_mlx *mlx, int ret)
 {
 	mlx_terminate(mlx -> mlx);
@@ -39,7 +37,7 @@ int	allocate_map_grid(t_map *map)
 	return (1);
 }
 
-static int	free_map_grid(t_map *map, int ret)
+int	free_map_grid(t_map *map, int ret)
 {
 	int	i;
 
