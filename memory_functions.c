@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:29:54 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/22 13:26:43 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:03:59 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,10 @@ int	free_split(char **arr)
 		arr = NULL;
 	}
 	return (-1);
+}
+
+int	free_and_return(void *ptr, int ret)
+{
+	free (ptr);
+	return (ret);
 }
