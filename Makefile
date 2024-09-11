@@ -35,9 +35,6 @@ LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # -------------RULES--------------
 
-# Ensure MLX42 is cloned and built before compiling
-$(OBJ_FILES): $(LIBMLX)
-
 $(NAME): $(OBJ_FILES) $(LIBFT) $(LIBMLX)
 	$(CC) $(FLAGS) $(OBJ_FILES) $(LIBFT) $(LIBS) -o $@
 
@@ -46,7 +43,7 @@ $(LIBMLX): mlx_clone
 		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
 	fi
 
-$(OBJ_FILES): %.o : %.c
+$(OBJ_FILES): %.o : %.c $(LIBMLX)
 	$(CC) $(FLAGS) -c $< -o $@ $(HEADERS)
 
 $(LIBFT):
