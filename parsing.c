@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/11 14:05:01 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:01:34 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	init_map(char *file, t_map *map)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1 || !get_map_dimensions(fd, map) || map -> w == -1
-		|| !file_name(file) || !allocate_map_grid(map))
+	if (fd == -1 || !get_map_dimensions(fd, map) || map->w == -1
+		|| !file_name(file) || map->w > 5000 || map->h > 5000
+		|| !allocate_map_grid(map))
 	{
 		if (fd != -1)
 			close (fd);
