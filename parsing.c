@@ -22,8 +22,8 @@ int	init_map(char *file, t_map *map)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1 || access(file, R_OK) != 0 || !get_map_dimensions(fd, map)
-		|| map -> w == -1 || !file_name(file) || !allocate_map_grid(map))
+	if (fd == -1 || !get_map_dimensions(fd, map) || map -> w == -1
+		|| !file_name(file) || !allocate_map_grid(map))
 	{
 		if (fd != -1)
 			close (fd);
@@ -32,11 +32,11 @@ int	init_map(char *file, t_map *map)
 	close (fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (free_map_grid(map, 0));
 	if (!parse(fd, map))
 	{
 		close(fd);
-		return (0);
+		return (free_map_grid(map, 0));
 	}
 	close(fd);
 	get_min_and_max(map);

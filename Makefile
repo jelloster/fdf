@@ -1,27 +1,50 @@
 # ----------FLAGS------------
-FLAGS			:=	-Wall -Wextra -Werror
-DEBUG_FLAGS		:=	-g
+
+FLAGS		:=	-Wall -Wextra -Werror
+DEBUG_FLAGS	:=	-g
 SANITIZE_FLAGS	:=	-g -fsanitize=address
 
-CC				:=	cc
+# ------- COMPILER ----------
 
-SRC_FILES		:=	main.c parsing.c memory_functions.c key_hook.c			\
-					color_functions.c fdf.c draw_line.c math_utils.c move.c \
-					background.c zoom.c
-OBJ_FILES		:=	$(SRC_FILES:.c=.o)
-NAME			:=	fdf
-LIBFT			:=	libft/libft.a
+CC		:=	cc
 
-LIBMLX			:=	MLX42/build/libmlx42.a
-MLX				:=	./MLX42
-HEADERS			:=	-I $(MLX)/include -I libft/inc
+# ------ SOURCE FILES -------
 
+SRC_FILES	:=	main.c \
+			parsing.c \
+			memory_functions.c \
+			key_hook.c \
+			color_functions.c \
+			fdf.c \
+			draw_line.c \
+			math_utils.c \
+			move.c \
+			background.c \
+			zoom.c \
+
+OBJ_FILES	:=	$(SRC_FILES:.c=.o)
+NAME		:=	fdf
+LIBFT		:=	libft/libft.a
+
+# ---------- MLX42 ----------
+
+LIBMLX		:=	MLX42/build/libmlx42.a
+MLX		:=	./MLX42
+HEADERS		:=	-I $(MLX)/include -I libft/inc
 LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # -------------RULES--------------
 
+# Ensure MLX42 is cloned and built before compiling
+$(OBJ_FILES): $(LIBMLX)
+
 $(NAME): $(OBJ_FILES) $(LIBFT) $(LIBMLX)
 	$(CC) $(FLAGS) $(OBJ_FILES) $(LIBFT) $(LIBS) -o $@
+
+$(LIBMLX): mlx_clone
+	@if [ ! -f "$(LIBMLX)" ]; then \
+		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
+	fi
 
 $(OBJ_FILES): %.o : %.c
 	$(CC) $(FLAGS) -c $< -o $@ $(HEADERS)
@@ -29,10 +52,13 @@ $(OBJ_FILES): %.o : %.c
 $(LIBFT):
 	@make -C libft
 
-$(LIBMLX):
-	@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-
 # ----------- PHONIES ------------
+
+.PHONY: mlx_clone
+mlx_clone:
+	@if [ ! -d "$(MLX)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX); \
+	fi
 
 .PHONY: all
 all: $(NAME)

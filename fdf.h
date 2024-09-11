@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/11 14:04:40 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:10:31 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void			free_mlx_exit(t_mlx *mlx, int ret);
 int				free_split(char **arr);
 int				allocate_map_grid(t_map *map);
 int				free_and_return(void *ptr, int ret);
+int				free_map_grid(t_map *map, int ret);
 
 //				math_utils.c
 unsigned int	ip(int s, int e, int n, int n_max);
