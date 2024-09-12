@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/11 14:10:31 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:12:09 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_map
 	int				w;
 	int				max;
 	int				min;
-	int				range;
+	long			range;
 	t_point			**grid;
 }					t_map;
 
@@ -65,15 +65,17 @@ typedef struct s_mlx
 
 typedef struct s_bresenhamn
 {
-	int				dx;
-	int				dy;
-	int				sx;
-	int				sy;
-	int				err;
-	int				e2;
-	int				t_l;
-	unsigned int	color;
-}					t_bresenhamn;
+	long				dx;
+	long				ddx;
+	long				dy;
+	long				ddy;
+	long				sx;
+	long				sy;
+	long				err;
+	long				e2;
+	long				t_l;
+	unsigned int		color;
+}						t_bresenhamn;
 
 typedef struct s_color
 {
@@ -111,6 +113,7 @@ typedef enum e_dir
 
 //				fdf.c
 void			fdf(t_mlx *mlx, t_map *map);
+void			finish_reading_file(int	fd);
 
 //				parsing.c
 int				init_map(char *file, t_map *map);
@@ -118,12 +121,12 @@ int				init_map(char *file, t_map *map);
 //				memory_functions.c
 void			free_mlx_exit(t_mlx *mlx, int ret);
 int				free_split(char **arr);
-int				allocate_map_grid(t_map *map);
+int				allocate_map(t_map *map);
 int				free_and_return(void *ptr, int ret);
 int				free_map_grid(t_map *map, int ret);
 
 //				math_utils.c
-unsigned int	ip(int s, int e, int n, int n_max);
+unsigned int	ip(int s, int e, int n, long n_max);
 int				dis(t_point p1, t_point p2);
 
 //				color_functions.c

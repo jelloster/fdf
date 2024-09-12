@@ -6,13 +6,13 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 12:44:54 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:05:41 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-unsigned int	ip(int s, int e, int n, int n_max)
+unsigned int	ip(int s, int e, int n, long n_max)
 {
 	double	ratio;
 

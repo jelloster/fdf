@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:05:04 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:19:39 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,17 @@ void	draw_map(t_mlx *mlx, t_map *map)
 			w++;
 		}
 		h++;
+	}
+}
+
+void	finish_reading_file(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
 	}
 }

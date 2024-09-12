@@ -6,28 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:01:15 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:46:35 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*
-void	get_point_colors(t_map *map)
-{
-	int	w;
-	int	h;
-
-	h = 0;
-	while (h < map -> h)
-	{
-		w = 0;
-		while (w < map -> w)
-			get_point_color(&map -> grid[h][w++], *map);
-		h++;
-	}
-}
-*/
 
 void	get_point_color(t_point *point, t_map map)
 {

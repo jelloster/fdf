@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/11 16:01:34 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:02:11 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int	get_map_dimensions(int fd, t_map *map);
 static int	parse(int fd, t_map *map);
 static void	get_min_and_max(t_map *map);
-static int	file_name(char *file);
+static int	name(char *file);
 
 int	init_map(char *file, t_map *map)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || !get_map_dimensions(fd, map) || map->w == -1
-		|| !file_name(file) || map->w > 5000 || map->h > 5000
-		|| !allocate_map_grid(map))
+		|| !name(file) || map->w > 5000 || map->h > 5000 || !allocate_map(map))
 	{
+		finish_reading_file(fd);
 		if (fd != -1)
 			close (fd);
 		return (0);
@@ -44,7 +44,7 @@ int	init_map(char *file, t_map *map)
 	return (1);
 }
 
-static int	file_name(char *file)
+static int	name(char *file)
 {
 	if (ft_strlen(file) < 4)
 		return (0);
@@ -133,5 +133,5 @@ static void	get_min_and_max(t_map *map)
 		}
 		h++;
 	}
-	map -> range = abs(map->max - map->min);
+	map -> range = (long)map->max - (long)map->min;
 }
