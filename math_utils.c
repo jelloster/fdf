@@ -26,6 +26,6 @@ int	dis(t_point p1, t_point p2)
 {
 	int	res;
 
-	res = sqrt(pow(p2.res_x - p1.res_x, 2) + pow(p2.res_y - p1.res_y, 2));
+	res = sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
 	return (res);
 }

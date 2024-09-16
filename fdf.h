@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/12 18:12:09 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:21:04 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct s_point
 {
-	int				res_x;
-	int				res_y;
+	int				x;
+	int				y;
 	int				value;
 	unsigned int	c;
 }					t_point;
@@ -51,8 +51,8 @@ typedef struct s_screen
 	int				mar_x;
 	int				mar_y;
 	int				start_x;
-	int				max_res_y;
-	int				min_res_y;
+	int				max_y;
+	int				min_y;
 }					t_screen;
 
 typedef struct s_mlx
@@ -63,7 +63,7 @@ typedef struct s_mlx
 	t_screen		s;
 }					t_mlx;
 
-typedef struct s_bresenhamn
+typedef struct s_br
 {
 	long				dx;
 	long				ddx;
@@ -75,7 +75,7 @@ typedef struct s_bresenhamn
 	long				e2;
 	long				t_l;
 	unsigned int		color;
-}						t_bresenhamn;
+}						t_br;
 
 typedef struct s_color
 {
@@ -113,7 +113,7 @@ typedef enum e_dir
 
 //				fdf.c
 void			fdf(t_mlx *mlx, t_map *map);
-void			finish_reading_file(int	fd);
+void			finish_reading_file(int fd);
 
 //				parsing.c
 int				init_map(char *file, t_map *map);

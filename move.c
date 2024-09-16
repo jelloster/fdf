@@ -35,8 +35,8 @@ void	move(t_mlx *mlx, t_dir dir)
 		w = -1;
 		while (++w < mlx -> map -> w)
 		{
-			mlx -> map -> grid[h][w].res_x += dx * MOVE_AMOUNT;
-			mlx -> map -> grid[h][w].res_y += dy * MOVE_AMOUNT;
+			mlx -> map -> grid[h][w].x += dx * MOVE_AMOUNT;
+			mlx -> map -> grid[h][w].y += dy * MOVE_AMOUNT;
 		}
 	}
 }
