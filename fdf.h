@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/16 15:21:04 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:56:15 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct s_point
 {
-	int				x;
-	int				y;
+	long			x;
+	long			y;
 	int				value;
 	unsigned int	c;
 }					t_point;
@@ -51,8 +51,6 @@ typedef struct s_screen
 	int				mar_x;
 	int				mar_y;
 	int				start_x;
-	int				max_y;
-	int				min_y;
 }					t_screen;
 
 typedef struct s_mlx
@@ -126,7 +124,7 @@ int				free_and_return(void *ptr, int ret);
 int				free_map_grid(t_map *map, int ret);
 
 //				math_utils.c
-unsigned int	ip(int s, int e, int n, long n_max);
+unsigned int	ip(long s, long e, long n, long n_max);
 int				dis(t_point p1, t_point p2);
 
 //				color_functions.c

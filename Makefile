@@ -1,6 +1,6 @@
 # ----------FLAGS------------
 
-FLAGS		:=	-Wall -Wextra -Werror
+FLAGS		:=	-Wall -Wextra -Werror -o2
 DEBUG_FLAGS	:=	-g
 SANITIZE_FLAGS	:=	-g -fsanitize=address
 
