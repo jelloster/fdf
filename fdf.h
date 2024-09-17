@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:23:22 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:56:15 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct s_point
 {
-	int				res_x;
-	int				res_y;
+	long			x;
+	long			y;
 	int				value;
 	unsigned int	c;
 }					t_point;
@@ -39,7 +39,7 @@ typedef struct s_map
 	int				w;
 	int				max;
 	int				min;
-	int				range;
+	long			range;
 	t_point			**grid;
 }					t_map;
 
@@ -51,8 +51,6 @@ typedef struct s_screen
 	int				mar_x;
 	int				mar_y;
 	int				start_x;
-	int				max_res_y;
-	int				min_res_y;
 }					t_screen;
 
 typedef struct s_mlx
@@ -63,17 +61,19 @@ typedef struct s_mlx
 	t_screen		s;
 }					t_mlx;
 
-typedef struct s_bresenhamn
+typedef struct s_br
 {
-	int				dx;
-	int				dy;
-	int				sx;
-	int				sy;
-	int				err;
-	int				e2;
-	int				t_l;
-	unsigned int	color;
-}					t_bresenhamn;
+	long				dx;
+	long				ddx;
+	long				dy;
+	long				ddy;
+	long				sx;
+	long				sy;
+	long				err;
+	long				e2;
+	long				t_l;
+	unsigned int		color;
+}						t_br;
 
 typedef struct s_color
 {
@@ -111,6 +111,7 @@ typedef enum e_dir
 
 //				fdf.c
 void			fdf(t_mlx *mlx, t_map *map);
+void			finish_reading_file(int fd);
 
 //				parsing.c
 int				init_map(char *file, t_map *map);
@@ -118,11 +119,12 @@ int				init_map(char *file, t_map *map);
 //				memory_functions.c
 void			free_mlx_exit(t_mlx *mlx, int ret);
 int				free_split(char **arr);
-int				allocate_map_grid(t_map *map);
+int				allocate_map(t_map *map);
+int				free_and_return(void *ptr, int ret);
 int				free_map_grid(t_map *map, int ret);
 
 //				math_utils.c
-unsigned int	ip(int s, int e, int n, int n_max);
+unsigned int	ip(long s, long e, long n, long n_max);
 int				dis(t_point p1, t_point p2);
 
 //				color_functions.c

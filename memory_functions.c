@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:29:54 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/22 13:26:43 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:10:45 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_mlx_exit(t_mlx *mlx, int ret)
 	exit (ret);
 }
 
-int	allocate_map_grid(t_map *map)
+int	allocate_map(t_map *map)
 {
 	int		i;
 
@@ -78,4 +78,10 @@ int	free_split(char **arr)
 		arr = NULL;
 	}
 	return (-1);
+}
+
+int	free_and_return(void *ptr, int ret)
+{
+	free (ptr);
+	return (ret);
 }

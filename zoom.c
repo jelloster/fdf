@@ -25,8 +25,8 @@ void	zoom_in(t_mlx *mlx)
 		w = -1;
 		while (++w < mlx -> map -> w)
 		{
-			map->grid[h][w].res_x += (w - h) * (mlx->s.half_tile_w);
-			map->grid[h][w].res_y += (w + h) * (mlx->s.half_tile_h) \
+			map->grid[h][w].x += (w - h) * (mlx->s.half_tile_w);
+			map->grid[h][w].y += (w + h) * (mlx->s.half_tile_h) \
 			- map->grid[h][w].value * mlx -> s.half_tile_h / 2;
 		}
 	}
@@ -52,8 +52,8 @@ void	zoom_out(t_mlx *mlx)
 		w = -1;
 		while (++w < mlx -> map -> w)
 		{
-			map->grid[h][w].res_x -= (w - h) * (mlx->s.half_tile_w);
-			map->grid[h][w].res_y -= (w + h) * (mlx->s.half_tile_h) \
+			map->grid[h][w].x -= (w - h) * (mlx->s.half_tile_w);
+			map->grid[h][w].y -= (w + h) * (mlx->s.half_tile_h) \
 			- map->grid[h][w].value * mlx -> s.half_tile_h / 2;
 		}
 	}

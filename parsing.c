@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:51:17 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 16:10:08 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:02:11 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 static int	get_map_dimensions(int fd, t_map *map);
 static int	parse(int fd, t_map *map);
 static void	get_min_and_max(t_map *map);
-static int	file_name(char *file);
+static int	name(char *file);
 
 int	init_map(char *file, t_map *map)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1 || !get_map_dimensions(fd, map) || map -> w == -1
-		|| !file_name(file) || !allocate_map_grid(map))
+	if (fd == -1 || !get_map_dimensions(fd, map) || map->w == -1
+		|| !name(file) || map->w > 5000 || map->h > 5000 || !allocate_map(map))
 	{
+		finish_reading_file(fd);
 		if (fd != -1)
 			close (fd);
 		return (0);
@@ -43,7 +44,7 @@ int	init_map(char *file, t_map *map)
 	return (1);
 }
 
-static int	file_name(char *file)
+static int	name(char *file)
 {
 	if (ft_strlen(file) < 4)
 		return (0);
@@ -92,22 +93,20 @@ static int	parse(int fd, t_map *map)
 	char	**split_line;
 
 	i = 0;
-	while (i < map -> h)
+	line = get_next_line(fd);
+	while (line)
 	{
-		line = get_next_line(fd);
 		if (!line)
 			return (0);
 		split_line = ft_split(line, ' ');
 		if (!split_line)
-		{
-			free(line);
-			return (0);
-		}
+			return (free_and_return(line, 0));
 		j = -1;
 		while (++j < map -> w)
 			map -> grid[i][j].value = ft_atoi(split_line[j]);
 		free(line);
 		free_split(split_line);
+		line = get_next_line(fd);
 		i++;
 	}
 	return (1);
@@ -134,5 +133,5 @@ static void	get_min_and_max(t_map *map)
 		}
 		h++;
 	}
-	map -> range = abs(map->max - map->min);
+	map -> range = (long)map->max - (long)map->min;
 }

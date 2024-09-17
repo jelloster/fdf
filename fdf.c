@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:51:30 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:05:04 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:01:11 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	get_screen_coords(t_map *map, t_screen *s)
 		while (++w < map->w)
 		{
 			p = &map->grid[h][w];
-			p->res_x = s->start_x + (w - h) * (s->half_tile_w);
-			p->res_y = s->mar_y + ((w + h) \
+			p->x = s->start_x + (w - h) * (s->half_tile_w);
+			p->y = s->mar_y + ((w + h) \
 				* (s->half_tile_h)) - p->value * h_multip;
 			get_point_color(p, *map);
 		}
@@ -93,5 +93,17 @@ void	draw_map(t_mlx *mlx, t_map *map)
 			w++;
 		}
 		h++;
+	}
+}
+
+void	finish_reading_file(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
 	}
 }
