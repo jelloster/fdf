@@ -19,7 +19,6 @@ SRC_FILES	:=	main.c \
 			draw_line.c \
 			math_utils.c \
 			move.c \
-			background.c \
 			zoom.c \
 
 OBJ_FILES	:=	$(SRC_FILES:.c=.o)

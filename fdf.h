@@ -29,7 +29,7 @@ typedef struct s_point
 {
 	long			x;
 	long			y;
-	int				value;
+	long				value;
 	unsigned int	c;
 }					t_point;
 
@@ -93,8 +93,8 @@ typedef enum e_dir
 
 // -- Macros --
 
-# define RES_X		2900
-# define RES_Y		2000
+# define RES_X		1200
+# define RES_Y		800
 
 # define MOVE_AMOUNT 100
 
@@ -130,6 +130,7 @@ int				dis(t_point p1, t_point p2);
 //				color_functions.c
 unsigned int	gradient(t_point p1, t_point p2, int t_l);
 void			get_point_color(t_point *point, t_map map);
+void			background_color(t_mlx *mlx, unsigned int color);
 
 //				draw_line.c
 void			draw_line(mlx_image_t *img, t_point p1, t_point p2);
@@ -147,7 +148,5 @@ void			draw_map(t_mlx *mlx, t_map *map);
 void			zoom_in(t_mlx *mlx);
 void			zoom_out(t_mlx *mlx);
 
-//				background.c
-void			background_color(t_mlx *mlx, unsigned int color);
 
 #endif

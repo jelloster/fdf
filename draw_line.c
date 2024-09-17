@@ -14,7 +14,7 @@
 
 static void	init_struct(t_br *b, t_point p1, t_point p2);
 static int	calculate_intersection(t_point *p1, t_point *p2);
-static void	bresenhamns_loop(mlx_image_t *img, t_point p1, t_point p2, t_br b);
+static void	bresenhamn(mlx_image_t *img, t_point p1, t_point p2, t_br b);
 
 void	draw_line(mlx_image_t *img, t_point p1, t_point p2)
 {
@@ -23,10 +23,10 @@ void	draw_line(mlx_image_t *img, t_point p1, t_point p2)
 	if (!calculate_intersection(&p1, &p2))
 		return ;
 	init_struct(&b, p1, p2);
-	bresenhamns_loop(img, p1, p2, b);
+	bresenhamn(img, p1, p2, b);
 }
 
-static void	bresenhamns_loop(mlx_image_t *img, t_point p1, t_point p2, t_br b)
+static void	bresenhamn(mlx_image_t *img, t_point p1, t_point p2, t_br b)
 {
 	while (1)
 	{
