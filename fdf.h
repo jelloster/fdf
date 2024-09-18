@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/16 16:56:15 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:59:52 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_point
 {
 	long			x;
 	long			y;
-	long				value;
+	long			value;
 	unsigned int	c;
 }					t_point;
 
@@ -147,6 +147,5 @@ void			draw_map(t_mlx *mlx, t_map *map);
 //				zoom.c
 void			zoom_in(t_mlx *mlx);
 void			zoom_out(t_mlx *mlx);
-
 
 #endif
