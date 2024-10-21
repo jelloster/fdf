@@ -1,5 +1,7 @@
 # FDF (Fil de Fer)
 
+![Alt text](example_img/42.fdf.png)
+
 ## Description
 
 FDF is a 42 project that implements a 3D wireframe visualization of a grid, allowing users to explore and manipulate a 2D array of heights.
@@ -32,7 +34,7 @@ Example:
 ``` ./fdf test_maps/42.fdf ```
 ## Controls
 
-You can move the map around the window using **the arrow keys** and zoom in and out using **w** and **s**.
+You can move the map around the window using **the arrow keys** and zoom in and out using **w** and **s**. **Esc** closes the program.
 
 ## Making your own map
 
@@ -41,7 +43,7 @@ Here are the requirements for your own map:
 - The map file ends with ".fdf"
 - Only numeric values are used.
 
-Here is an example map (test_maps/42.fdf):
+Here is an example map (test_maps/42.fdf) as seen in the picture at the top of the README:
 
 ```
 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
