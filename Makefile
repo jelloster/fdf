@@ -10,18 +10,22 @@ CC		:=	cc
 
 # ------ SOURCE FILES -------
 
-SRC_FILES	:=	main.c \
-			parsing.c \
-			memory_functions.c \
-			key_hook.c \
-			color_functions.c \
-			fdf.c \
-			draw_line.c \
-			math_utils.c \
-			move.c \
-			zoom.c \
+SRC_PATH	:= ./srcs/
 
-OBJ_FILES	:=	$(SRC_FILES:.c=.o)
+SRC_FILES	:=	main.c			\
+			parsing.c 			\
+			memory_functions.c 	\
+			key_hook.c 			\
+			color_functions.c 	\
+			fdf.c 				\
+			draw_line.c 		\
+			math_utils.c 		\
+			move.c 				\
+			zoom.c 				\
+
+PATHED_SRC	:= $(addprefix $(SRC_PATH), $(SRC_FILES))
+
+OBJ_FILES	:=	$(PATHED_SRC:.c=.o)
 NAME		:=	fdf
 LIBFT		:=	libft/libft.a
 
@@ -29,7 +33,7 @@ LIBFT		:=	libft/libft.a
 
 LIBMLX		:=	MLX42/build/libmlx42.a
 MLX		:=	./MLX42
-HEADERS		:=	-I $(MLX)/include -I libft/inc
+HEADERS		:=	-I $(MLX)/include -I libft/inc -I inc
 LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # -------------RULES--------------

@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:52:40 by motuomin          #+#    #+#             */
-/*   Updated: 2024/09/18 13:59:52 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:30:41 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 # include <math.h>
 
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/inc/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/inc/libft.h"
 
 // -- Typedefs --
 
